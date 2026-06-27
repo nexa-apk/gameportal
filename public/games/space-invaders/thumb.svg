@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#020617"/>
+  <!-- Stars -->
+  <circle cx="30" cy="20" r="1.5" fill="white" opacity="0.8"/>
+  <circle cx="90" cy="50" r="1" fill="white" opacity="0.6"/>
+  <circle cx="150" cy="15" r="2" fill="white" opacity="0.9"/>
+  <circle cx="250" cy="35" r="1.5" fill="white" opacity="0.7"/>
+  <circle cx="320" cy="10" r="1" fill="white" opacity="0.5"/>
+  <circle cx="380" cy="55" r="2" fill="white" opacity="0.8"/>
+  <circle cx="60" cy="100" r="1" fill="white" opacity="0.4"/>
+  <circle cx="340" cy="80" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="10" cy="180" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="390" cy="160" r="1" fill="white" opacity="0.6"/>
+  <!-- Alien row 1 (red) -->
+  <rect x="52" y="56" width="28" height="16" rx="2" fill="#ef4444"/>
+  <rect x="48" y="50" width="8" height="8" rx="1" fill="#ef4444"/>
+  <rect x="72" y="50" width="8" height="8" rx="1" fill="#ef4444"/>
+  <rect x="44" y="68" width="6" height="4" rx="1" fill="#ef4444"/>
+  <rect x="78" y="68" width="6" height="4" rx="1" fill="#ef4444"/>
+  <rect x="57" y="60" width="5" height="5" rx="1" fill="white"/>
+  <rect x="66" y="60" width="5" height="5" rx="1" fill="white"/>
+  <!-- Alien row 1 second -->
+  <rect x="152" y="56" width="28" height="16" rx="2" fill="#ef4444"/>
+  <rect x="148" y="50" width="8" height="8" rx="1" fill="#ef4444"/>
+  <rect x="172" y="50" width="8" height="8" rx="1" fill="#ef4444"/>
+  <rect x="144" y="68" width="6" height="4" rx="1" fill="#ef4444"/>
+  <rect x="178" y="68" width="6" height="4" rx="1" fill="#ef4444"/>
+  <rect x="157" y="60" width="5" height="5" rx="1" fill="white"/>
+  <rect x="166" y="60" width="5" height="5" rx="1" fill="white"/>
+  <!-- Alien row 1 third -->
+  <rect x="252" y="56" width="28" height="16" rx="2" fill="#ef4444"/>
+  <rect x="248" y="50" width="8" height="8" rx="1" fill="#ef4444"/>
+  <rect x="272" y="50" width="8" height="8" rx="1" fill="#ef4444"/>
+  <rect x="244" y="68" width="6" height="4" rx="1" fill="#ef4444"/>
+  <rect x="278" y="68" width="6" height="4" rx="1" fill="#ef4444"/>
+  <rect x="257" y="60" width="5" height="5" rx="1" fill="white"/>
+  <rect x="266" y="60" width="5" height="5" rx="1" fill="white"/>
+  <!-- Alien row 2 (green) -->
+  <rect x="102" y="102" width="28" height="16" rx="2" fill="#22c55e"/>
+  <rect x="98" y="96" width="8" height="8" rx="1" fill="#22c55e"/>
+  <rect x="122" y="96" width="8" height="8" rx="1" fill="#22c55e"/>
+  <rect x="94" y="114" width="6" height="4" rx="1" fill="#22c55e"/>
+  <rect x="128" y="114" width="6" height="4" rx="1" fill="#22c55e"/>
+  <rect x="107" y="106" width="5" height="5" rx="1" fill="white"/>
+  <rect x="116" y="106" width="5" height="5" rx="1" fill="white"/>
+  <!-- Alien row 2 second -->
+  <rect x="202" y="102" width="28" height="16" rx="2" fill="#22c55e"/>
+  <rect x="198" y="96" width="8" height="8" rx="1" fill="#22c55e"/>
+  <rect x="222" y="96" width="8" height="8" rx="1" fill="#22c55e"/>
+  <rect x="194" y="114" width="6" height="4" rx="1" fill="#22c55e"/>
+  <rect x="228" y="114" width="6" height="4" rx="1" fill="#22c55e"/>
+  <rect x="207" y="106" width="5" height="5" rx="1" fill="white"/>
+  <rect x="216" y="106" width="5" height="5" rx="1" fill="white"/>
+  <!-- Enemy laser -->
+  <rect x="168" y="120" width="4" height="40" rx="2" fill="#ef4444" opacity="0.9"/>
+  <!-- Explosion -->
+  <circle cx="66" cy="155" r="12" fill="#f97316" opacity="0.9"/>
+  <circle cx="66" cy="155" r="7" fill="#fef08a"/>
+  <!-- Player ship -->
+  <polygon points="200,240 180,268 220,268" fill="#38bdf8"/>
+  <polygon points="200,248 188,264 212,264" fill="#7dd3fc"/>
+  <rect x="196" y="263" width="8" height="5" rx="2" fill="#f97316"/>
+  <polygon points="180,268 162,275 176,254" fill="#0ea5e9"/>
+  <polygon points="220,268 238,275 224,254" fill="#0ea5e9"/>
+  <ellipse cx="200" cy="270" rx="9" ry="5" fill="#f97316" opacity="0.7"/>
+  <!-- Player laser -->
+  <rect x="197" y="185" width="6" height="55" rx="3" fill="#38bdf8"/>
+  <!-- Score HUD -->
+  <text x="20" y="292" fill="#38bdf8" font-family="monospace" font-size="13" font-weight="bold">SCORE: 1850</text>
+  <text x="380" y="292" text-anchor="end" fill="#f87171" font-family="monospace" font-size="13">♥♥♥</text>
+  <text x="200" y="292" text-anchor="middle" fill="#818cf8" font-family="monospace" font-size="15" font-weight="bold" letter-spacing="2">WAVE 1</text>
+</svg>

@@ -1,65 +1,82 @@
-import Image from "next/image";
+import Link from 'next/link'
+import type { Metadata } from 'next'
+import GameGrid from '@/components/GameGrid'
+import AdBanner from '@/components/AdBanner'
+import { games, categories, getFeaturedGames } from '@/lib/games'
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: 'FunGames — Free Online Games',
+  description: 'Play free online arcade, puzzle and action games right in your browser. No downloads!',
+}
+
+function FeaturedBanner() {
+  const featured = getFeaturedGames()
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <section className="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 py-10">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="mb-6 flex items-center gap-2">
+          <span className="text-2xl">🔥</span>
+          <h2 className="text-xl font-bold text-white">Featured Games</h2>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          {featured.map((game, i) => (
+            <Link
+              key={game.slug}
+              href={`/games/${game.slug}`}
+              className="group relative overflow-hidden rounded-2xl shadow-xl"
+            >
+              <div className={`relative aspect-video overflow-hidden ${i === 0 ? 'sm:aspect-[16/10]' : ''}`}>
+                <img
+                  src={game.thumbnail}
+                  alt={game.title}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-4">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-orange-400">
+                    {game.category}
+                  </p>
+                  <h3 className="text-lg font-bold text-white">{game.title}</h3>
+                  <p className="mt-1 text-xs text-gray-300 line-clamp-2">{game.description}</p>
+                </div>
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                  <span className="rounded-full bg-orange-500 px-6 py-2 font-bold text-white shadow-lg">
+                    ▶ PLAY NOW
+                  </span>
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
-      </main>
-    </div>
-  );
+      </div>
+    </section>
+  )
+}
+
+export default function HomePage() {
+  return (
+    <>
+      <FeaturedBanner />
+
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6" id="games">
+        {/* Top ad */}
+        <AdBanner slot="homepage-top" className="mb-8" />
+
+        {/* Game grid with category filter */}
+        <div className="mb-4 flex items-center gap-2">
+          <span className="text-xl">🕹️</span>
+          <h2 className="text-xl font-bold text-gray-900">All Games</h2>
+          <span className="ml-auto rounded-full bg-orange-100 px-3 py-0.5 text-sm font-medium text-orange-700">
+            {games.length} games
+          </span>
+        </div>
+
+        <GameGrid games={games} categories={categories} />
+
+        {/* Mid-page ad */}
+        <AdBanner slot="homepage-mid" format="horizontal" className="mt-10" />
+      </div>
+    </>
+  )
 }

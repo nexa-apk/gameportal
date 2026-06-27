@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e1b4b"/>
+      <stop offset="100%" style="stop-color:#312e81"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4f46e5"/>
+      <stop offset="100%" style="stop-color:#6d28d9"/>
+    </linearGradient>
+    <linearGradient id="matched" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#059669"/>
+      <stop offset="100%" style="stop-color:#10b981"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/>
+  <!-- Stars background -->
+  <circle cx="30" cy="30" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="70" cy="60" r="1" fill="white" opacity="0.5"/>
+  <circle cx="370" cy="25" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="350" cy="80" r="1" fill="white" opacity="0.4"/>
+  <circle cx="15" cy="200" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="385" cy="200" r="1.5" fill="white" opacity="0.5"/>
+  <!-- Row 1: face-down, matched, face-down, matched -->
+  <rect x="30" y="40" width="80" height="90" rx="10" fill="url(#card)"/>
+  <text x="70" y="95" text-anchor="middle" fill="white" font-size="36">?</text>
+  <rect x="120" y="40" width="80" height="90" rx="10" fill="url(#matched)"/>
+  <text x="160" y="95" text-anchor="middle" font-size="36">⭐</text>
+  <rect x="210" y="40" width="80" height="90" rx="10" fill="url(#matched)"/>
+  <text x="250" y="95" text-anchor="middle" font-size="36">⭐</text>
+  <rect x="300" y="40" width="80" height="90" rx="10" fill="url(#card)"/>
+  <text x="340" y="95" text-anchor="middle" fill="white" font-size="36">?</text>
+  <!-- Row 2: flipped (showing), face-down, face-down, face-down -->
+  <rect x="30" y="145" width="80" height="90" rx="10" fill="#fef3c7"/>
+  <text x="70" y="200" text-anchor="middle" font-size="36">🎯</text>
+  <rect x="120" y="145" width="80" height="90" rx="10" fill="url(#card)"/>
+  <text x="160" y="200" text-anchor="middle" fill="white" font-size="36">?</text>
+  <rect x="210" y="145" width="80" height="90" rx="10" fill="#fef3c7"/>
+  <text x="250" y="200" text-anchor="middle" font-size="36">🎯</text>
+  <rect x="300" y="145" width="80" height="90" rx="10" fill="url(#card)"/>
+  <text x="340" y="200" text-anchor="middle" fill="white" font-size="36">?</text>
+  <!-- Title -->
+  <text x="200" y="272" text-anchor="middle" fill="#a5b4fc" font-family="Arial, sans-serif" font-size="22" font-weight="bold" letter-spacing="2">MEMORY MATCH</text>
+</svg>

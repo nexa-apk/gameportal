@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180" viewBox="0 0 320 180">
+  <rect width="320" height="180" fill="#e8f4f8"/>
+  <!-- Platforms -->
+  <rect x="120" y="160" width="60" height="12" rx="4" fill="#4caf50"/>
+  <rect x="60" y="130" width="60" height="12" rx="4" fill="#4caf50"/>
+  <rect x="180" y="100" width="60" height="12" rx="4" fill="#4caf50"/>
+  <rect x="100" y="70" width="60" height="12" rx="4" fill="#4caf50"/>
+  <!-- Spring platform -->
+  <rect x="200" y="40" width="60" height="12" rx="4" fill="#ff9900"/>
+  <rect x="224" y="28" width="12" height="14" fill="#ffdd00"/>
+  <!-- Doodle character -->
+  <ellipse cx="160" cy="52" rx="18" ry="22" fill="#6be35d"/>
+  <circle cx="150" cy="44" r="4" fill="#000"/>
+  <circle cx="170" cy="44" r="4" fill="#000"/>
+  <circle cx="160" cy="55" r="5" fill="#ff6666"/>
+  <!-- Score -->
+  <text x="30" y="30" font-family="monospace" font-size="20" font-weight="bold" fill="#333">1250</text>
+  <text x="160" y="175" text-anchor="middle" font-family="monospace" font-size="18" font-weight="bold" fill="#2d7a1e">DOODLE JUMP</text>
+</svg>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180" viewBox="0 0 320 180">
+  <rect width="320" height="180" fill="#0a0a1a"/>
+  <!-- Spinning obstacle (pie chart style) -->
+  <path d="M 160 90 L 160 50 A 40 40 0 0 1 194.6 70 Z" fill="#ff4444"/>
+  <path d="M 160 90 L 194.6 70 A 40 40 0 0 1 194.6 110 Z" fill="#44aaff"/>
+  <path d="M 160 90 L 194.6 110 A 40 40 0 0 1 125.4 110 Z" fill="#ffdd00"/>
+  <path d="M 160 90 L 125.4 110 A 40 40 0 0 1 160 50 Z" fill="#44dd44"/>
+  <!-- Inner hole -->
+  <circle cx="160" cy="90" r="22" fill="#0a0a1a"/>
+  <!-- Ball (blue, passing through blue segment) -->
+  <circle cx="185" cy="90" r="14" fill="#000" opacity="0.8"/>
+  <circle cx="185" cy="90" r="12" fill="#44aaff"/>
+  <circle cx="181" cy="86" r="4" fill="#fff" opacity="0.4"/>
+  <!-- Second obstacle above -->
+  <path d="M 160 20 L 160 -10 A 30 30 0 0 1 186 5 Z" fill="#ff4444"/>
+  <path d="M 160 20 L 186 5 A 30 30 0 0 1 186 35 Z" fill="#44aaff"/>
+  <path d="M 160 20 L 186 35 A 30 30 0 0 1 134 35 Z" fill="#ffdd00"/>
+  <path d="M 160 20 L 134 35 A 30 30 0 0 1 160 -10 Z" fill="#44dd44"/>
+  <circle cx="160" cy="20" r="15" fill="#0a0a1a"/>
+  <!-- Score -->
+  <text x="160" y="150" text-anchor="middle" font-family="monospace" font-size="30" font-weight="bold" fill="white">12</text>
+  <text x="160" y="175" text-anchor="middle" font-family="monospace" font-size="18" font-weight="bold" fill="white">COLOR SWITCH</text>
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180" viewBox="0 0 320 180">
+  <rect width="320" height="180" fill="#000"/>
+  <!-- Stars -->
+  <circle cx="30" cy="20" r="1" fill="white" opacity="0.7"/>
+  <circle cx="80" cy="50" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="200" cy="30" r="1" fill="white"/>
+  <circle cx="270" cy="70" r="1.5" fill="white" opacity="0.7"/>
+  <circle cx="310" cy="10" r="1" fill="white"/>
+  <circle cx="50" cy="160" r="1" fill="white" opacity="0.5"/>
+  <circle cx="130" cy="140" r="1.5" fill="white"/>
+  <circle cx="290" cy="150" r="1" fill="white" opacity="0.7"/>
+  <!-- Large asteroid -->
+  <polygon points="60,40 90,25 110,45 105,75 75,85 45,65" stroke="#88aaff" stroke-width="2" fill="none"/>
+  <!-- Medium asteroid -->
+  <polygon points="240,110 265,100 280,120 270,145 245,140 230,125" stroke="#88aaff" stroke-width="2" fill="none"/>
+  <!-- Small asteroid -->
+  <polygon points="180,50 195,42 205,55 195,65 180,60" stroke="#88aaff" stroke-width="2" fill="none"/>
+  <!-- Ship -->
+  <polygon points="160,95 152,115 160,109 168,115" stroke="#00ffcc" stroke-width="2" fill="none"/>
+  <!-- Thrust -->
+  <line x1="156" y1="113" x2="153" y2="125" stroke="#ff6600" stroke-width="2"/>
+  <line x1="164" y1="113" x2="167" y2="125" stroke="#ff6600" stroke-width="2"/>
+  <!-- Bullet -->
+  <circle cx="160" cy="75" r="3" fill="#ffff00"/>
+  <circle cx="160" cy="60" r="3" fill="#ffff00"/>
+  <!-- Title -->
+  <text x="160" y="168" text-anchor="middle" font-family="monospace" font-size="16" font-weight="bold" fill="white">ASTEROIDS</text>
+</svg>

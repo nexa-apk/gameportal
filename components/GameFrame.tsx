@@ -11,6 +11,18 @@ const gameComponentMap: Record<string, React.ComponentType> = {
   FlappyBird: dynamic(() => import('@/components/games/FlappyBird'), { ssr: false, loading: () => <GameLoading /> }),
   Breakout: dynamic(() => import('@/components/games/Breakout'), { ssr: false, loading: () => <GameLoading /> }),
   SpaceInvaders: dynamic(() => import('@/components/games/SpaceInvaders'), { ssr: false, loading: () => <GameLoading /> }),
+  PacMan: dynamic(() => import('@/components/games/PacMan'), { ssr: false, loading: () => <GameLoading /> }),
+  Pong: dynamic(() => import('@/components/games/Pong'), { ssr: false, loading: () => <GameLoading /> }),
+  Asteroids: dynamic(() => import('@/components/games/Asteroids'), { ssr: false, loading: () => <GameLoading /> }),
+  Minesweeper: dynamic(() => import('@/components/games/Minesweeper'), { ssr: false, loading: () => <GameLoading /> }),
+  FruitNinja: dynamic(() => import('@/components/games/FruitNinja'), { ssr: false, loading: () => <GameLoading /> }),
+  DoodleJump: dynamic(() => import('@/components/games/DoodleJump'), { ssr: false, loading: () => <GameLoading /> }),
+  CrossyRoad: dynamic(() => import('@/components/games/CrossyRoad'), { ssr: false, loading: () => <GameLoading /> }),
+  BubbleShooter: dynamic(() => import('@/components/games/BubbleShooter'), { ssr: false, loading: () => <GameLoading /> }),
+  TowerDefense: dynamic(() => import('@/components/games/TowerDefense'), { ssr: false, loading: () => <GameLoading /> }),
+  MemoryMatchGame: dynamic(() => import('@/components/games/MemoryMatchGame'), { ssr: false, loading: () => <GameLoading /> }),
+  WhackAMole: dynamic(() => import('@/components/games/WhackAMole'), { ssr: false, loading: () => <GameLoading /> }),
+  ColorSwitch: dynamic(() => import('@/components/games/ColorSwitch'), { ssr: false, loading: () => <GameLoading /> }),
 }
 
 function GameLoading() {

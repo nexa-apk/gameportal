@@ -147,7 +147,9 @@ export default function CrossyRoad() {
 
         die() {
           this.bestScore = Math.max(this.bestScore, this.score)
-          this.running = false; this.showOverlay('SQUASHED! 💀', `Score: ${this.score}`)
+          this.running = false
+          window.dispatchEvent(new CustomEvent('nexagames:score', { detail: { score: this.score } }))
+          this.showOverlay('SQUASHED! 💀', `Score: ${this.score}`)
         }
 
         draw() {

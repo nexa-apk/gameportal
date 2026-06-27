@@ -194,6 +194,7 @@ export default function Breakout() {
               this.updateHUD()
               if (this.lives <= 0) {
                 this.running = false
+                window.dispatchEvent(new CustomEvent('nexagames:score', { detail: { score: this.score } }))
                 this.showOverlay('GAME OVER', `Final Score: ${this.score}`)
               } else {
                 this.resetBall()

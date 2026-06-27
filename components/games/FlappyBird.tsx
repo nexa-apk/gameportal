@@ -149,6 +149,7 @@ export default function FlappyBird() {
 
             if (dead) {
               this.running = false
+              window.dispatchEvent(new CustomEvent('nexagames:score', { detail: { score: this.score } }))
               this.showOverlay(
                 'GAME OVER',
                 `Score: ${this.score}`,

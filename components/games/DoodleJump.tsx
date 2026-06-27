@@ -149,7 +149,9 @@ export default function DoodleJump() {
           // Die if fallen off screen
           if (this.py - this.cameraY > H + 50) {
             this.bestScore = Math.max(this.bestScore, this.score)
-            this.running = false; this.showOverlay('GAME OVER', `Height: ${this.score}`)
+            this.running = false
+            window.dispatchEvent(new CustomEvent('nexagames:score', { detail: { score: this.score } }))
+            this.showOverlay('GAME OVER', `Height: ${this.score}`)
           }
 
           this.extendPlatforms()

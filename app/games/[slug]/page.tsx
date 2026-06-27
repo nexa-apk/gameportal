@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import GameFrame from '@/components/GameFrame'
 import GameCard from '@/components/GameCard'
 import AdBanner from '@/components/AdBanner'
+import ScorePanel from '@/components/ScorePanel'
 import { getGame, games, formatPlays } from '@/lib/games'
 
 type Props = { params: Promise<{ slug: string }> }
@@ -74,6 +75,9 @@ export default async function GamePage({ params }: Props) {
           ▶ Play Now
         </a>
       </div>
+
+      {/* Score submission + leaderboard */}
+      <ScorePanel gameSlug={game.slug} gameTitle={game.title} />
 
       {/* Ad below game */}
       <AdBanner slot="game-page-bottom" format="horizontal" className="mt-8" />

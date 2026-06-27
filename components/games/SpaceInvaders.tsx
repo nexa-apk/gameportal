@@ -247,6 +247,7 @@ export default function SpaceInvaders() {
                 this.updateHUD()
                 if (this.lives <= 0) {
                   this.running = false
+                  window.dispatchEvent(new CustomEvent('nexagames:score', { detail: { score: this.score } }))
                   this.showOverlay('GAME OVER', `Wave: ${this.wave}`)
                 }
                 break
@@ -256,6 +257,7 @@ export default function SpaceInvaders() {
 
           if (this.enemies.some(e => e.alive && e.y > H - 100)) {
             this.running = false
+            window.dispatchEvent(new CustomEvent('nexagames:score', { detail: { score: this.score } }))
             this.showOverlay('GAME OVER', `Wave: ${this.wave}`)
           }
 

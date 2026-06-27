@@ -181,7 +181,7 @@ export default function Snake() {
         gameOver() {
           this.running = false
           this.dead = true
-
+          window.dispatchEvent(new CustomEvent('nexagames:score', { detail: { score: this.score } }))
           // Rebuild overlay as game over
           this.overlay.removeAll(true)
           const bg = this.add.rectangle(0, 0, 300, 200, 0x000000, 0.9).setStrokeStyle(2, 0xef4444)

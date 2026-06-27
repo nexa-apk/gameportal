@@ -1,84 +1,84 @@
-# CLAUDE.md — gameportal
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
-Game portal web app with HTML5 games, built with Next.js. Monetized via Google AdSense.
-Public URL: https://fun.nexahost.top
+NexaGames — a Miniclip-style browser game portal at **https://fun.nexahost.top**. Built with Next.js 16 (App Router), Tailwind CSS v4, and Phaser 4 for HTML5 games. Monetized via Google AdSense.
 
-## Stack
-- **Framework**: Next.js 15+ (App Router, TypeScript)
-- **Styling**: Tailwind CSS
-- **Games**: Phaser.js (HTML5 game framework)
-- **Process Manager**: PM2
-- **Hosting**: Proxmox LXC (Ubuntu 22.04), IP 192.168.0.103
-- **Tunnel**: Cloudflare Tunnel (proxmox-tunnel) → fun.nexahost.top
-- **Repo**: https://github.com/nexa-apk/gameportal (branch: master)
+- **Host**: Proxmox LXC (Ubuntu 22.04), IP `192.168.0.103`
+- **Tunnel**: Cloudflare Tunnel → `fun.nexahost.top`
+- **Repo**: https://github.com/nexa-apk/gameportal (branch: `master`)
+- **Process manager**: PM2, process name `gameportal`, runs `npm start` on port 3000
 
-## Directory Structure
-```
-/opt/gameportal/
-├── app/
-│   ├── page.tsx          # Homepage — game listing
-│   ├── games/
-│   │   └── [slug]/
-│   │       └── page.tsx  # Individual game page
-│   ├── layout.tsx
-│   └── globals.css
-├── public/
-│   └── games/            # Static game assets (Phaser scenes, sprites, audio)
-├── components/
-│   ├── GameCard.tsx
-│   ├── GameFrame.tsx
-│   └── AdBanner.tsx
-├── lib/
-│   └── games.ts          # Game metadata/registry
-├── CLAUDE.md
-├── AGENTS.md
-└── SKILL.md
+## Commands
+
+```bash
+npm run dev      # dev server (Turbopack)
+npm run build    # production build — runs TypeScript check + static generation
+npm run start    # production server
+npm run lint     # ESLint (next/core-web-vitals + next/typescript)
 ```
 
-## Game Registry
-Games are defined in `lib/games.ts` as a typed array:
+There are no tests. After any change, run `npm run build` to catch TypeScript and static generation errors before deploying.
+
+**Deploy** (as root — root's PM2 owns port 3000):
+```bash
+npm run build
+sudo pm2 restart gameportal
+git add -A && git commit -m "feat: ..." && git push
+```
+
+> The `gamedev` user cannot bind port 3000 (owned by root's PM2 at `/root/.pm2`). Always use `sudo pm2` for deployment. The `gamedev` PM2 instance (`/home/gamedev/.pm2`) cannot start the app.
+
+## Architecture
+
+### Data flow
+`lib/games.ts` is the single source of truth. It exports:
+- `games: Game[]` — registry of all games with slug, title, description, thumbnail, category, component name, optional `featured`/`plays`/`rating`/`isNew`/`badge` fields
+- `categories: Category[]`
+- Helper functions: `getGame`, `getGamesByCategory`, `getFeaturedGames`, `formatPlays`
+
+Pages are **statically generated** at build time using `generateStaticParams` (in `app/games/[slug]/page.tsx`). Adding a new game requires: registering it in `lib/games.ts`, creating `components/games/<Name>.tsx`, adding to `GameFrame.tsx`'s component map, and placing a thumbnail at `public/games/<slug>/thumb.svg`.
+
+### Component map (GameFrame.tsx)
+`GameFrame.tsx` maintains a **static map** of component name → dynamic import. This map must be updated manually whenever a new game component is added — Next.js cannot do dynamic string-based imports at build time.
+
 ```ts
-export type Game = {
-  slug: string
-  title: string
-  description: string
-  thumbnail: string
-  category: string
-  component: string  // Phaser scene file path
+const gameComponentMap: Record<string, React.ComponentType> = {
+  Snake: dynamic(() => import('@/components/games/Snake'), { ssr: false }),
+  // ... must list every game explicitly
 }
 ```
 
-## Deploy Workflow
-```bash
-cd /opt/gameportal
-npm run build
-pm2 restart gameportal
-git add -A && git commit -m "msg" && git push
-```
+### Game components pattern
+All games in `components/games/` follow this pattern:
+- `'use client'` directive
+- `useEffect` to initialize Phaser (async import to avoid SSR)
+- `useRef<HTMLDivElement>` as the Phaser mount target
+- Cleanup via `gameRef.current?.destroy(true)` in the effect return
+- `Phaser.Scale.FIT` + `Phaser.Scale.CENTER_BOTH` for responsive canvas
+- Game logic written entirely inside `class GameScene extends Phaser.Scene` defined within the effect
 
-## PM2
-- Process name: `gameportal`
-- Runs: `npm start` (Next.js production)
-- Auto-restart: enabled via `pm2 startup`
+Phaser is imported dynamically inside `useEffect` (`const Phaser = (await import('phaser')).default`) — never at the module level — to prevent SSR errors.
+
+### Routing
+- `/` — homepage (`app/page.tsx`): featured banner + category-filtered game grid
+- `/games/[slug]` — game page (`app/games/[slug]/page.tsx`): breadcrumb + GameFrame + related games
+- All routes are Server Components except `GameFrame.tsx`, `GameCard.tsx`, `GameGrid.tsx`, `AdBanner.tsx` (client components)
+
+### Styling
+Tailwind CSS v4 (imported via `@import "tailwindcss"` in `globals.css`). No `tailwind.config.js` — configuration is done via `@theme` blocks in CSS. Font variable `--font-geist` is set via `next/font/google` in `layout.tsx`.
+
+### AdSense
+`AdBanner.tsx` shows a dashed placeholder when `NEXT_PUBLIC_ADSENSE_ID` is unset or equals the default `ca-pub-XXXXXXXXXXXXXXXX`. Set real ID in `.env.local` to activate live ads. Never place ads inside the Phaser canvas.
 
 ## Coding Conventions
-- Use TypeScript strictly — no `any`
-- Tailwind only for styling, no inline styles
-- App Router only — no `pages/` directory
-- Server Components by default, Client Components only when needed (`'use client'`)
-- Game components must be dynamically imported (SSR disabled):
-  ```ts
-  const GameComponent = dynamic(() => import('@/components/games/Snake'), { ssr: false })
-  ```
+- **TypeScript strict** — no `any`. The `Phaser` namespace types come from `phaser`'s bundled types; use `import('phaser').Types.Core.GameConfig` for config types.
+- **No inline styles** except where Tailwind cannot express a value (e.g., `paddingBottom: '56.25%'` for 16:9 ratio).
+- **Server Components by default** — add `'use client'` only when using hooks, browser APIs, or Phaser.
+- The `@/*` path alias maps to the project root (not `src/`).
 
-## AdSense
-- Placeholder component: `components/AdBanner.tsx`
-- Insert ads in: homepage (between game cards), game page (below game frame)
-- Do not place ads inside game canvas
-
-## Environment Variables
-```
-# .env.local
-NEXT_PUBLIC_ADSENSE_ID=ca-pub-XXXXXXXXXXXXXXXX
-```
+## Known Issues / Gotchas
+- `Phaser.Display.Color.Interpolate.ColorWithColor` changed its type signature in Phaser 4 — do not pass plain `{r,g,b,a}` objects; use `Phaser.Display.Color` instances or interpolate manually.
+- Two stale files exist (`components/games/MemoryMatch.tsx`, `components/games/SpaceShooter.tsx`) and two stale asset directories (`public/games/memory-match/`, `public/games/space-shooter/`) from an earlier naming. They are not referenced by the registry and can be deleted.
+- `next build` uses Turbopack. Incremental builds can leave stale route artifacts — if a newly added slug returns 404 in production, delete `.next/` and rebuild clean.

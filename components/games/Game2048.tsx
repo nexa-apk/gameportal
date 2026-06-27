@@ -177,10 +177,14 @@ export default function Game2048() {
 
           if (!this.won && this.grid.some(row => row.some(v => v >= 2048))) {
             this.won = true
+            window.dispatchEvent(new CustomEvent('nexagames:score', { detail: { score: this.score } }))
             this.showOverlay('YOU WIN! 🎉', `Score: ${this.score}`)
             return
           }
-          if (this.isOver()) this.showOverlay('GAME OVER', `Score: ${this.score}`)
+          if (this.isOver()) {
+            window.dispatchEvent(new CustomEvent('nexagames:score', { detail: { score: this.score } }))
+            this.showOverlay('GAME OVER', `Score: ${this.score}`)
+          }
         }
 
         isOver(): boolean {

@@ -178,7 +178,7 @@ export default function Asteroids() {
                 this.lives--
                 this.livesText.setText('♥'.repeat(Math.max(0, this.lives)))
                 this.explode(this.sx, this.sy)
-                if (this.lives <= 0) { this.running = false; this.showOverlay('GAME OVER', `Score: ${this.score}`); return }
+                if (this.lives <= 0) { this.running = false; window.dispatchEvent(new CustomEvent('nexagames:score', { detail: { score: this.score } })); this.showOverlay('GAME OVER', `Score: ${this.score}`); return }
                 this.sx = W / 2; this.sy = H / 2; this.vx = 0; this.vy = 0; this.invincible = 2500
                 break
               }

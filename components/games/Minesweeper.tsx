@@ -108,7 +108,7 @@ export default function Minesweeper() {
           if (!this.grid.length) this.grid = buildGrid(c, r)
           const cell = this.grid[r]?.[c]
           if (!cell || cell.revealed || cell.flagged) return
-          if (cell.mine) { cell.revealed = true; this.state = 'lost'; this.revealAll(); this.showOverlay('BOOM! 💥', `You hit a mine! Flags: ${this.flagCount}`); return }
+          if (cell.mine) { cell.revealed = true; this.state = 'lost'; this.revealAll(); window.dispatchEvent(new CustomEvent('nexagames:score', { detail: { score: 0 } })); this.showOverlay('BOOM! 💥', `You hit a mine! Flags: ${this.flagCount}`); return }
           flood(this.grid, c, r)
           this.checkWin()
         }
@@ -118,7 +118,7 @@ export default function Minesweeper() {
         checkWin() {
           let hidden = 0
           for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) if (!this.grid[r][c].revealed) hidden++
-          if (hidden === MINES) { this.state = 'won'; this.showOverlay('YOU WIN! 🎉', `Cleared in ${Math.round(this.elapsed)}s`) }
+          if (hidden === MINES) { this.state = 'won'; window.dispatchEvent(new CustomEvent('nexagames:score', { detail: { score: Math.round(10000 / Math.max(1, this.elapsed)) } })); this.showOverlay('YOU WIN! 🎉', `Cleared in ${Math.round(this.elapsed)}s`) }
           this.updateHud()
         }
 

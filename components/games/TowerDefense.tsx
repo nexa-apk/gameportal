@@ -150,8 +150,8 @@ export default function TowerDefense() {
           this.bullets = this.bullets.filter(b => b.speed > 0)
           this.enemies = this.enemies.filter(e => e.hp > 0)
 
-          if (this.lives <= 0) { this.running = false; this.showOverlay('GAME OVER', `Wave: ${this.wave}  Score: ${this.score}`); return }
-          if (this.wave >= 10 && this.enemies.length === 0 && this.spawnLeft === 0) { this.running = false; this.showOverlay('YOU WIN! 🏆', `Score: ${this.score}`); return }
+          if (this.lives <= 0) { this.running = false; window.dispatchEvent(new CustomEvent('nexagames:score', { detail: { score: this.score } })); this.showOverlay('GAME OVER', `Wave: ${this.wave}  Score: ${this.score}`); return }
+          if (this.wave >= 10 && this.enemies.length === 0 && this.spawnLeft === 0) { this.running = false; window.dispatchEvent(new CustomEvent('nexagames:score', { detail: { score: this.score } })); this.showOverlay('YOU WIN! 🏆', `Score: ${this.score}`); return }
 
           this.ui.setText(`Gold: ${this.gold}  Lives: ${this.lives}  Wave: ${this.wave}/10  Score: ${this.score}`)
           this.draw()

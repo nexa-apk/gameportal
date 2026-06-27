@@ -87,6 +87,7 @@ export default function WhackAMole() {
           if (this.timeLeft <= 0) {
             this.running = false
             this.bestScore = Math.max(this.bestScore, this.score)
+            window.dispatchEvent(new CustomEvent('nexagames:score', { detail: { score: this.score } }))
             this.showOverlay('TIME UP!', `Score: ${this.score}  Best: ${this.bestScore}`)
             return
           }

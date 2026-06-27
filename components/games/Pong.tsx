@@ -128,6 +128,8 @@ export default function Pong() {
 
         endGame(msg: string) {
           this.running = false
+          const winScore = msg === 'YOU WIN!' ? this.s1 * 100 : this.s2 * 100
+          window.dispatchEvent(new CustomEvent('nexagames:score', { detail: { score: winScore } }))
           this.showOverlay(msg, `${this.s1} — ${this.s2}`)
         }
 

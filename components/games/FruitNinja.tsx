@@ -125,7 +125,7 @@ export default function FruitNinja() {
               f.missed = true; f.active = false; this.misses++; this.combo = 0
               const hearts = '❤️'.repeat(Math.max(0, 3 - this.misses))
               this.missText.setText(hearts || '💀')
-              if (this.misses >= 3) { this.running = false; this.showOverlay('GAME OVER', `Score: ${this.score}`); return }
+              if (this.misses >= 3) { this.running = false; window.dispatchEvent(new CustomEvent('nexagames:score', { detail: { score: this.score } })); this.showOverlay('GAME OVER', `Score: ${this.score}`); return }
             } else if (!f.sliced) comboReset = false
           }
           if (comboReset) this.combo = 0

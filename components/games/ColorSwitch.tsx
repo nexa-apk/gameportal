@@ -109,7 +109,9 @@ export default function ColorSwitch() {
               const colorIdx = (segIdx + o.colorOffset) % 4
               if (colorIdx !== this.ballColorIdx) {
                 this.bestScore = Math.max(this.bestScore, this.score)
-                this.running = false; this.showOverlay('GAME OVER', `Score: ${this.score}`)
+                this.running = false
+                window.dispatchEvent(new CustomEvent('nexagames:score', { detail: { score: this.score } }))
+                this.showOverlay('GAME OVER', `Score: ${this.score}`)
                 return
               }
             }
@@ -128,7 +130,9 @@ export default function ColorSwitch() {
           // Die if fallen off screen
           if (this.ballY - this.cameraY > H + 50) {
             this.bestScore = Math.max(this.bestScore, this.score)
-            this.running = false; this.showOverlay('GAME OVER', `Score: ${this.score}`)
+            this.running = false
+            window.dispatchEvent(new CustomEvent('nexagames:score', { detail: { score: this.score } }))
+            this.showOverlay('GAME OVER', `Score: ${this.score}`)
             return
           }
 

@@ -280,12 +280,13 @@ export default function PacMan() {
         loseLife() {
           this.lives--
           this.livesText.setText('♥'.repeat(Math.max(0, this.lives)))
-          if (this.lives <= 0) { this.running = false; this.showOverlay('GAME OVER', `Score: ${this.score}`); return }
+          if (this.lives <= 0) { this.running = false; window.dispatchEvent(new CustomEvent('nexagames:score', { detail: { score: this.score } })); this.showOverlay('GAME OVER', `Score: ${this.score}`); return }
           this.spawnPac()
         }
 
         winGame() {
           this.running = false
+          window.dispatchEvent(new CustomEvent('nexagames:score', { detail: { score: this.score } }))
           this.showOverlay('YOU WIN! 🎉', `Score: ${this.score}`)
         }
 

@@ -87,6 +87,8 @@ export default function MemoryMatchGame() {
               this.matched++; this.flippedIdx = []
               if (this.matched === TOTAL / 2) {
                 this.running = false
+                const memScore = Math.max(0, 10000 - this.moves * 100 - Math.round(this.elapsed) * 10)
+                window.dispatchEvent(new CustomEvent('nexagames:score', { detail: { score: memScore } }))
                 this.time.delayedCall(500, () => this.showOverlay('YOU WIN! 🎉', `${this.moves} moves in ${Math.round(this.elapsed)}s`))
               }
             } else {

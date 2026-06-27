@@ -143,7 +143,7 @@ export default function BubbleShooter() {
             this.findAndPop(col, row)
           }
           // Game over if bubbles reach too low
-          for (const row2 of this.grid) { if (!row2) continue; for (const b of row2) { if (b?.active && b.row > TOP_ROWS + 3) { this.running = false; this.showOverlay('GAME OVER', `Score: ${this.score}`); return } } }
+          for (const row2 of this.grid) { if (!row2) continue; for (const b of row2) { if (b?.active && b.row > TOP_ROWS + 3) { this.running = false; window.dispatchEvent(new CustomEvent('nexagames:score', { detail: { score: this.score } })); this.showOverlay('GAME OVER', `Score: ${this.score}`); return } } }
         }
 
         findAndPop(startCol: number, startRow: number) {
@@ -171,7 +171,7 @@ export default function BubbleShooter() {
           // Check win
           let remaining = 0
           for (const row of this.grid) { if (!row) continue; for (const b of row) { if (b?.active) remaining++ } }
-          if (remaining === 0) { this.running = false; this.showOverlay('YOU WIN! 🎉', `Score: ${this.score}`) }
+          if (remaining === 0) { this.running = false; window.dispatchEvent(new CustomEvent('nexagames:score', { detail: { score: this.score } })); this.showOverlay('YOU WIN! 🎉', `Score: ${this.score}`) }
         }
 
         draw() {

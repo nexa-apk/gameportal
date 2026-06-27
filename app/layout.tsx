@@ -45,6 +45,12 @@ function Header() {
           >
             Games
           </Link>
+          <Link
+            href="/leaderboard"
+            className="rounded-lg px-3 py-1.5 text-sm font-medium text-slate-300 transition hover:bg-white/10 hover:text-white"
+          >
+            🏆 Leaderboard
+          </Link>
           <a
             href="https://fun.nexahost.top"
             target="_blank"

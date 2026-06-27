@@ -229,6 +229,7 @@ export default function Tetris() {
 
         endGame() {
           this.running = false
+          window.dispatchEvent(new CustomEvent('nexagames:score', { detail: { score: this.score } }))
           this.showStartOverlay('GAME OVER', `Score: ${this.score}  Level: ${this.level}`)
         }
 

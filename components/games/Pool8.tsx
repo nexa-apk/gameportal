@@ -23,6 +23,7 @@ const METER_BOT = TB - 5
 const SPIN_CX = 690
 const SPIN_CY = 430
 const SPIN_R = 22
+const TIMER_MAX = 30
 
 const POCKETS: { x: number; y: number }[] = [
   { x: TL, y: TT }, { x: MID_X, y: TT }, { x: TR, y: TT },
@@ -82,7 +83,7 @@ export default function Pool8() {
         // ── Foul popup ──────────────────────────────────────────────────────────
         private foulTimer = 0
 
-        // ── Aiming (Part 2) ─────────────────────────────────────────────────────
+        // ── Aiming ──────────────────────────────────────────────────────────────
         private aimAngle = 0
         private power = 0
         private charging = false
@@ -94,11 +95,21 @@ export default function Pool8() {
         private shotSpinX = 0
         private shotSpinY = 0
 
+        // ── Turn timer ───────────────────────────────────────────────────────────
+        private timerRemaining = TIMER_MAX
+        private timerActive = false
+
+        // ── Stats ────────────────────────────────────────────────────────────────
+        private playerBallsPotted: [number, number] = [0, 0]
+        private playerFouls: [number, number] = [0, 0]
+        private playerShots: [number, number] = [0, 0]
+
         // ── Phaser objects ──────────────────────────────────────────────────────
         private balls: Ball[] = []
         private texts: (Phaser.GameObjects.Text | null)[] = []
         private gfx!: Phaser.GameObjects.Graphics
         private menuItems: Phaser.GameObjects.GameObject[] = []
+        private winObjs: Phaser.GameObjects.GameObject[] = []
         private cpuTimer: Phaser.Time.TimerEvent | null = null
 
         // HUD texts (game screen only)
@@ -149,7 +160,7 @@ export default function Pool8() {
           this.input.on('pointermove', (ptr: Phaser.Input.Pointer) => {
             if (this.screen !== 'game') return
 
-            if (this.phase === 'ballInHand') {
+            if (this.phase === 'ballInHand' && !this.isCpuTurn()) {
               this.placeX = Phaser.Math.Clamp(ptr.x, TL + BALL_R + 1, TR - BALL_R - 1)
               this.placeY = Phaser.Math.Clamp(ptr.y, TT + BALL_R + 1, TB - BALL_R - 1)
               return
@@ -169,10 +180,10 @@ export default function Pool8() {
 
           this.input.on('pointerdown', (ptr: Phaser.Input.Pointer) => {
             if (this.screen !== 'game') return
-
-            if (this.phase === 'win') { this.showMenu(); return }
+            if (this.phase === 'win') return  // handled by win screen buttons
 
             if (this.phase === 'ballInHand') {
+              if (this.isCpuTurn()) return
               if (this.validPlacement(this.placeX, this.placeY))
                 this.placeCueBall(this.placeX, this.placeY)
               return
@@ -216,6 +227,8 @@ export default function Pool8() {
         private showMenu() {
           this.screen = 'menu'
           this.cpuTimer?.remove(); this.cpuTimer = null
+          this.winObjs.forEach(o => o.destroy()); this.winObjs = []
+          this.timerActive = false
           this.menuItems.forEach(o => o.destroy()); this.menuItems = []
           this.texts.forEach(t => t?.destroy()); this.texts = []; this.balls = []
           this.hudP1.setVisible(false); this.hudP2.setVisible(false)
@@ -281,6 +294,10 @@ export default function Pool8() {
 
         // ── Rack & turn management ───────────────────────────────────────────────
         private doRack() {
+          this.winObjs.forEach(o => o.destroy()); this.winObjs = []
+          this.playerBallsPotted = [0, 0]
+          this.playerFouls = [0, 0]
+          this.playerShots = [0, 0]
           this.balls = []
           const rackX = TL + (TR - TL) * 0.75
           const dX = BALL_R * 2, dY = BALL_R * Math.sqrt(3)
@@ -311,6 +328,8 @@ export default function Pool8() {
           this.cueFirstHit = null; this.pottedThisTurn = []; this.cuePottedThisTurn = false
           this.power = 0; this.charging = false; this.spin = { x: 0, y: 0 }
           this.shootAnim = -1; this.phase = 'ready'
+          this.timerRemaining = TIMER_MAX
+          this.timerActive = !this.isCpuTurn()
           this.updateHUD()
 
           if (this.isCpuTurn()) {
@@ -338,7 +357,7 @@ export default function Pool8() {
           this.hudP2.setText(`${this.playerName[1]}\n${grpStr(this.playerGroup[1])}\n${rem(1)} balls`)
 
           if (this.phase === 'win') {
-            this.hudTurn.setColor('#ffd700').setText(`\u{1F3C6} ${this.playerName[this.winner]} WINS!  Click for menu`)
+            this.hudTurn.setColor('#ffd700').setText('')
           } else if (this.phase === 'ballInHand') {
             this.hudTurn.setColor('#ff9944').setText(`${this.playerName[p]}: place cue ball anywhere, then click`)
           } else {
@@ -352,10 +371,8 @@ export default function Pool8() {
           const p = this.currentPlayer, opp = 1 - p
           let foul = false, foulReason = ''
 
-          // Scratch
           if (this.cuePottedThisTurn) { foul = true; foulReason = 'Scratch!' }
 
-          // Wrong first contact (after groups assigned, non-break)
           if (!foul && !this.isBreak && this.playerGroup[p] !== null) {
             if (!this.cueFirstHit) {
               foul = true; foulReason = 'No contact!'
@@ -367,7 +384,6 @@ export default function Pool8() {
             }
           }
 
-          // 8-ball potted
           if (this.pottedThisTurn.includes(8)) {
             if (this.isBreak) {
               const eb = this.balls.find(b => b.num === 8)
@@ -380,16 +396,21 @@ export default function Pool8() {
           }
 
           if (foul) {
-            // Remove cue ball from table — opponent places it
+            this.playerFouls[p]++
             const cue = this.balls.find(b => b.num === 0)
             if (cue) { cue.active = false; cue.vx = 0; cue.vy = 0 }
             this.placeX = MID_X; this.placeY = MID_Y
             this.showFoul(foulReason + '  Ball in hand.')
             this.currentPlayer = opp; this.isBreak = false
-            this.phase = 'ballInHand'; this.updateHUD(); return
+            this.phase = 'ballInHand'; this.updateHUD()
+            if (this.isCpuTurn()) {
+              this.time.delayedCall(700, () => {
+                if (this.phase === 'ballInHand' && this.isCpuTurn()) this.cpuPlaceBall()
+              })
+            }
+            return
           }
 
-          // Assign groups on first pot
           if (this.playerGroup[p] === null) {
             const first = this.pottedThisTurn.find(n => n !== 8)
             if (first !== undefined) {
@@ -399,9 +420,9 @@ export default function Pool8() {
             }
           }
 
-          // Continue or switch
           const ownPotted = this.pottedThisTurn.filter(n => n !== 8 &&
             (this.playerGroup[p] === null || IS_STRIPE[n] === (this.playerGroup[p] === 'stripe')))
+          this.playerBallsPotted[p] += ownPotted.length
 
           this.isBreak = false
           if (ownPotted.length > 0) { this.startTurn() } else { this.currentPlayer = opp; this.startTurn() }
@@ -421,11 +442,94 @@ export default function Pool8() {
         private endGame(winnerIdx: number) {
           this.winner = winnerIdx; this.phase = 'win'
           this.hudFoul.setVisible(false)
+          this.timerActive = false
+          this.cpuTimer?.remove(); this.cpuTimer = null
           this.updateHUD()
+          const score = winnerIdx === 0 ? 100 : 0
           if (typeof window !== 'undefined')
             window.dispatchEvent(new CustomEvent('nexagames:score', {
-              detail: { game: 'pool-8', player: this.playerName[winnerIdx], score: 1 }
+              detail: { game: 'pool-8', player: this.playerName[winnerIdx], score }
             }))
+          this.showWinScreen()
+        }
+
+        private showWinScreen() {
+          this.winObjs.forEach(o => o.destroy()); this.winObjs = []
+          const w = this.winner
+          const winColor = w === 0 ? '#44ff88' : '#ff6644'
+
+          const bg = this.add.graphics().setDepth(50)
+          bg.fillStyle(0x000000, 0.84); bg.fillRect(0, 0, W, H)
+          bg.fillStyle(0x111122, 0.95); bg.fillRoundedRect(W/2 - 220, 60, 440, 330, 12)
+          bg.lineStyle(2, w === 0 ? 0x44ff88 : 0xff6644, 0.7)
+          bg.strokeRoundedRect(W/2 - 220, 60, 440, 330, 12)
+          this.winObjs.push(bg)
+
+          const trophy = this.add.text(W / 2, 102, '\u{1F3C6}', {
+            fontSize: '38px', fontFamily: 'monospace',
+          }).setOrigin(0.5).setDepth(51)
+          this.winObjs.push(trophy)
+
+          const title = this.add.text(W / 2, 152, `${this.playerName[w]} WINS!`, {
+            fontSize: '30px', color: winColor, fontFamily: 'monospace', fontStyle: 'bold',
+          }).setOrigin(0.5).setDepth(51)
+          this.winObjs.push(title)
+
+          // Stats table
+          const p0 = this.playerName[0].substring(0, 10)
+          const p1 = this.playerName[1].substring(0, 10)
+          const col0w = 110
+          const statsHeader = this.add.text(W / 2, 198,
+            `${''.padEnd(16)}${p0.padEnd(col0w / 8)}   ${p1}`, {
+            fontSize: '12px', color: '#aaaaaa', fontFamily: 'monospace', fontStyle: 'bold',
+          }).setOrigin(0.5).setDepth(51)
+          this.winObjs.push(statsHeader)
+
+          const statsRows = [
+            ['Balls Potted', this.playerBallsPotted[0], this.playerBallsPotted[1]],
+            ['Fouls', this.playerFouls[0], this.playerFouls[1]],
+            ['Shots Taken', this.playerShots[0], this.playerShots[1]],
+          ] as [string, number, number][]
+
+          const statsBlock = statsRows.map(([label, v0, v1]) =>
+            `${label.padEnd(14)}   ${String(v0).padStart(3)}             ${String(v1).padStart(3)}`
+          ).join('\n')
+
+          const statsText = this.add.text(W / 2, 218, statsBlock, {
+            fontSize: '13px', color: '#cccccc', fontFamily: 'monospace', lineSpacing: 8,
+          }).setOrigin(0.5, 0).setDepth(51)
+          this.winObjs.push(statsText)
+
+          // Divider
+          const div = this.add.graphics().setDepth(51)
+          div.lineStyle(1, 0x333355, 0.8); div.lineBetween(W/2 - 180, 312, W/2 + 180, 312)
+          this.winObjs.push(div)
+
+          // Rematch button
+          const remBtn = this.add.text(W / 2 - 90, 340, '  REMATCH  ', {
+            fontSize: '16px', color: '#ffffff', fontFamily: 'monospace', fontStyle: 'bold',
+            backgroundColor: '#1a5c2a', padding: { x: 18, y: 10 },
+          }).setOrigin(0.5).setDepth(52).setInteractive({ useHandCursor: true })
+          remBtn.on('pointerover', () => remBtn.setStyle({ color: '#ffdd00' }))
+          remBtn.on('pointerout',  () => remBtn.setStyle({ color: '#ffffff' }))
+          remBtn.on('pointerdown', () => {
+            this.winObjs.forEach(o => o.destroy()); this.winObjs = []
+            this.doRack()
+          })
+          this.winObjs.push(remBtn)
+
+          // Main Menu button
+          const menuBtn = this.add.text(W / 2 + 100, 340, '  MAIN MENU  ', {
+            fontSize: '16px', color: '#ffffff', fontFamily: 'monospace', fontStyle: 'bold',
+            backgroundColor: '#2a1a4c', padding: { x: 18, y: 10 },
+          }).setOrigin(0.5).setDepth(52).setInteractive({ useHandCursor: true })
+          menuBtn.on('pointerover', () => menuBtn.setStyle({ color: '#ffdd00' }))
+          menuBtn.on('pointerout',  () => menuBtn.setStyle({ color: '#ffffff' }))
+          menuBtn.on('pointerdown', () => {
+            this.winObjs.forEach(o => o.destroy()); this.winObjs = []
+            this.showMenu()
+          })
+          this.winObjs.push(menuBtn)
         }
 
         // ── Ball-in-hand ─────────────────────────────────────────────────────────
@@ -441,25 +545,151 @@ export default function Pool8() {
           this.startTurn()
         }
 
-        // ── CPU AI (basic — Part 3B will improve) ────────────────────────────────
+        private cpuPlaceBall() {
+          const candidates = [
+            { x: TL + (TR - TL) * 0.25, y: MID_Y },
+            { x: TL + (TR - TL) * 0.20, y: MID_Y - 45 },
+            { x: TL + (TR - TL) * 0.20, y: MID_Y + 45 },
+            { x: TL + (TR - TL) * 0.30, y: MID_Y - 25 },
+            { x: TL + (TR - TL) * 0.30, y: MID_Y + 25 },
+          ]
+          for (const pos of candidates) {
+            if (this.validPlacement(pos.x, pos.y)) { this.placeCueBall(pos.x, pos.y); return }
+          }
+          for (let i = 0; i < 40; i++) {
+            const x = TL + BALL_R * 2 + Math.random() * (TR - TL - BALL_R * 4)
+            const y = TT + BALL_R * 2 + Math.random() * (TB - TT - BALL_R * 4)
+            if (this.validPlacement(x, y)) { this.placeCueBall(x, y); return }
+          }
+        }
+
+        // ── Turn timer expiry ─────────────────────────────────────────────────────
+        private timerExpired() {
+          this.playerFouls[this.currentPlayer]++
+          const opp = 1 - this.currentPlayer
+          const cue = this.balls.find(b => b.num === 0)
+          if (cue) { cue.active = false; cue.vx = 0; cue.vy = 0 }
+          this.placeX = MID_X; this.placeY = MID_Y
+          this.showFoul("Time's up!  Ball in hand.")
+          this.currentPlayer = opp; this.isBreak = false
+          this.phase = 'ballInHand'; this.updateHUD()
+          if (this.isCpuTurn()) {
+            this.time.delayedCall(700, () => {
+              if (this.phase === 'ballInHand' && this.isCpuTurn()) this.cpuPlaceBall()
+            })
+          }
+        }
+
+        // ── CPU AI ───────────────────────────────────────────────────────────────
         private doCpuShot() {
           const cue = this.getCue(); if (!cue) return
           const grp = this.playerGroup[1]
-          let targets = this.balls.filter(b => b.active && b.num !== 0 && b.num !== 8 &&
+          let ownBalls = this.balls.filter(b => b.active && b.num !== 0 && b.num !== 8 &&
             (grp === null || IS_STRIPE[b.num] === (grp === 'stripe')))
-          if (targets.length === 0) { const e = this.balls.find(b => b.active && b.num === 8); if (e) targets = [e] }
+          if (ownBalls.length === 0) ownBalls = this.balls.filter(b => b.active && b.num === 8)
 
-          let angle: number
-          if (targets.length > 0) {
-            const tgt = targets[Math.floor(Math.random() * targets.length)]
-            angle = Math.atan2(tgt.y - cue.y, tgt.x - cue.x)
-            const spread = this.cpuDiff === 'easy' ? 0.38 : this.cpuDiff === 'medium' ? 0.13 : 0.03
-            angle += (Math.random() - 0.5) * spread
-          } else { angle = Math.random() * Math.PI * 2 }
+          if (this.cpuDiff === 'easy') {
+            this.cpuEasyShot(cue, ownBalls)
+          } else if (this.cpuDiff === 'medium') {
+            this.cpuMediumShot(cue, ownBalls)
+          } else {
+            this.cpuHardShot(cue, ownBalls)
+          }
+        }
 
+        private cpuEasyShot(cue: Ball, targets: Ball[]) {
+          if (targets.length === 0) { this.fireCpuShot(Math.random() * Math.PI * 2, 0.30 + Math.random() * 0.30); return }
+          const ball = targets[Math.floor(Math.random() * targets.length)]
+          let bestPocket = POCKETS[0], bestDist = Infinity
+          for (const pk of POCKETS) {
+            const d = Math.hypot(pk.x - ball.x, pk.y - ball.y)
+            if (d < bestDist) { bestDist = d; bestPocket = pk }
+          }
+          const bpDx = bestPocket.x - ball.x, bpDy = bestPocket.y - ball.y
+          const bpLen = Math.hypot(bpDx, bpDy)
+          const ghostX = ball.x - (bpDx / bpLen) * BALL_R * 2
+          const ghostY = ball.y - (bpDy / bpLen) * BALL_R * 2
+          let angle = Math.atan2(ghostY - cue.y, ghostX - cue.x)
+          angle += (Math.random() - 0.5) * 0.58
+          this.fireCpuShot(angle, 0.30 + Math.random() * 0.32)
+        }
+
+        private cpuMediumShot(cue: Ball, targets: Ball[]) {
+          const best = this.findBestPot(cue, targets)
+          if (best) {
+            this.fireCpuShot(best.angle + (Math.random() - 0.5) * 0.10, 0.40 + Math.random() * 0.35)
+          } else {
+            this.cpuEasyShot(cue, targets)
+          }
+        }
+
+        private cpuHardShot(cue: Ball, targets: Ball[]) {
+          const best = this.findBestPot(cue, targets)
+          if (best && best.score > 0.18) {
+            this.fireCpuShot(best.angle + (Math.random() - 0.5) * 0.03, 0.45 + Math.random() * 0.35)
+          } else {
+            // Safe shot: push own ball toward a cushion, minimise opponent opportunity
+            if (targets.length > 0) {
+              const ball = targets[Math.floor(Math.random() * targets.length)]
+              const angle = Math.atan2(ball.y - cue.y, ball.x - cue.x) + (Math.random() - 0.5) * 0.15
+              this.fireCpuShot(angle, 0.22 + Math.random() * 0.20)
+            } else {
+              this.fireCpuShot(Math.random() * Math.PI * 2, 0.20 + Math.random() * 0.20)
+            }
+          }
+        }
+
+        private findBestPot(cue: Ball, targets: Ball[]): { score: number; angle: number } | null {
+          let best: { score: number; angle: number } | null = null
+          for (const ball of targets) {
+            for (const pk of POCKETS) {
+              const r = this.cpuRatePot(cue, ball, pk)
+              if (r && (!best || r.score > best.score)) best = r
+            }
+          }
+          return best
+        }
+
+        private cpuRatePot(cue: Ball, ball: Ball, pocket: { x: number; y: number }): { score: number; angle: number } | null {
+          const bpDx = pocket.x - ball.x, bpDy = pocket.y - ball.y
+          const bpLen = Math.hypot(bpDx, bpDy)
+          if (bpLen < 2) return null
+          const bpNx = bpDx / bpLen, bpNy = bpDy / bpLen
+          const ghostX = ball.x - bpNx * BALL_R * 2, ghostY = ball.y - bpNy * BALL_R * 2
+          const aDx = ghostX - cue.x, aDy = ghostY - cue.y
+          const aLen = Math.hypot(aDx, aDy)
+          if (aLen < 2) return null
+          const aNx = aDx / aLen, aNy = aDy / aLen
+
+          // Check cue path for obstructions
+          for (const b of this.balls) {
+            if (!b.active || b === ball || b.num === 0) continue
+            const ex = cue.x - b.x, ey = cue.y - b.y
+            const bv = ex * aNx + ey * aNy, cv = ex * ex + ey * ey - 4 * BALL_R * BALL_R
+            const disc = bv * bv - cv
+            if (disc >= 0) { const t = -bv - Math.sqrt(disc); if (t > 2 && t < aLen - BALL_R) return null }
+          }
+          // Check ball-to-pocket path for obstructions
+          for (const b of this.balls) {
+            if (!b.active || b === ball) continue
+            const ex = ball.x - b.x, ey = ball.y - b.y
+            const bv = ex * bpNx + ey * bpNy, cv = ex * ex + ey * ey - 4 * BALL_R * BALL_R
+            const disc = bv * bv - cv
+            if (disc >= 0) { const t = -bv - Math.sqrt(disc); if (t > 2 && t < bpLen - BALL_R) return null }
+          }
+
+          const cutCos = Math.max(0, aNx * bpNx + aNy * bpNy)
+          const distScore = Math.exp(-aLen / 400)
+          const pocketScore = Math.exp(-bpLen / 250)
+          const score = cutCos * 0.55 + distScore * 0.25 + pocketScore * 0.20
+          return { score, angle: Math.atan2(aDy, aDx) }
+        }
+
+        private fireCpuShot(angle: number, power: number) {
           this.aimAngle = angle; this.shotAngle = angle
-          this.shotPower = 0.38 + Math.random() * 0.48
-          this.power = this.shotPower; this.shotSpinX = 0; this.shotSpinY = 0
+          this.shotPower = Math.min(1, Math.max(0.10, power))
+          this.power = this.shotPower
+          this.shotSpinX = 0; this.shotSpinY = 0
           this.shootAnim = SHOOT_ANIM_DUR
         }
 
@@ -473,6 +703,15 @@ export default function Pool8() {
           }
 
           if (this.screen === 'menu') { this.drawMenu(); return }
+
+          // Turn timer — only ticks during ready phase, not while balls move
+          if (this.timerActive && this.phase === 'ready') {
+            this.timerRemaining -= dt
+            if (this.timerRemaining <= 0) {
+              this.timerActive = false
+              this.timerExpired()
+            }
+          }
 
           if (this.charging && this.phase === 'ready' && !this.isCpuTurn())
             this.power = Math.min(1, this.power + CHARGE_RATE * dt)
@@ -497,6 +736,7 @@ export default function Pool8() {
 
         private fireShot() {
           const cue = this.getCue(); if (!cue) return
+          this.playerShots[this.currentPlayer]++
           const speed = this.shotPower * MAX_SHOT_SPEED
           const ax = Math.cos(this.shotAngle), ay = Math.sin(this.shotAngle)
           const fwd = 1 - this.shotSpinY * 0.08
@@ -611,7 +851,6 @@ export default function Pool8() {
           g.fillStyle(0x06060f); g.fillRect(0, 0, W, H)
           g.fillStyle(0x0d3d14, 0.25); g.fillRect(TL, TT, TR - TL, TB - TT)
           g.lineStyle(1.5, 0x1a6b2e, 0.4); g.strokeRect(TL, TT, TR - TL, TB - TT)
-          // Decorative pocket dots on menu
           g.fillStyle(0x060606)
           for (const p of POCKETS) g.fillCircle(p.x, p.y, POCKET_R * 0.6)
         }
@@ -623,11 +862,25 @@ export default function Pool8() {
           const inAim = this.phase === 'ready' && !!cue && this.shootAnim < 0 && !this.isCpuTurn()
           if (inAim) this.drawAimGuide(g, cue!)
           this.drawBalls(g)
-          if (this.phase === 'ballInHand') this.drawBallInHand(g)
+          if (this.phase === 'ballInHand' && !this.isCpuTurn()) this.drawBallInHand(g)
           if (cue && (inAim || this.shootAnim >= 0)) this.drawCueStick(g, cue)
           this.drawPowerMeter(g)
           this.drawSpinControl(g)
           this.drawPlayerPanels(g)
+          if (this.timerActive && this.phase === 'ready') this.drawTimerBar(g)
+        }
+
+        // ── Timer bar ─────────────────────────────────────────────────────────────
+        private drawTimerBar(g: Phaser.GameObjects.Graphics) {
+          const frac = Math.max(0, this.timerRemaining / TIMER_MAX)
+          const p = this.currentPlayer
+          const bx = p === 0 ? 3 : W - 283
+          const by = H - 12
+          const bw = 280
+          g.fillStyle(0x111111, 0.85); g.fillRect(bx, by, bw, 7)
+          const col = frac > 0.66 ? 0x33cc44 : frac > 0.33 ? 0xffcc00 : 0xff4433
+          g.fillStyle(col, 0.92); g.fillRect(bx, by, bw * frac, 7)
+          g.lineStyle(0.5, 0x444444, 0.7); g.strokeRect(bx, by, bw, 7)
         }
 
         // ── Ball-in-hand ghost ────────────────────────────────────────────────────
@@ -645,10 +898,8 @@ export default function Pool8() {
         private drawPlayerPanels(g: Phaser.GameObjects.Graphics) {
           const p = this.currentPlayer
           const panelH = H - TB - 6
-          // P1
           g.lineStyle(1.5, p === 0 ? 0x44ff88 : 0x225522, p === 0 ? 0.7 : 0.25)
           g.strokeRect(3, TB + 3, 280, panelH)
-          // P2
           g.lineStyle(1.5, p === 1 ? 0x44ff88 : 0x225522, p === 1 ? 0.7 : 0.25)
           g.strokeRect(W - 283, TB + 3, 280, panelH)
 

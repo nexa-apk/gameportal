@@ -1,13 +1,12 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import ContactLink from '@/components/ContactLink'
 
 export const metadata: Metadata = {
   title: 'About NexaGames',
   description: 'Learn about NexaGames — a free browser game portal with arcade, puzzle, action, and sports games. No downloads, no sign-ups. Just play!',
   robots: { index: true, follow: true },
 }
-
-const CONTACT_EMAIL = 'muhdsapuan@gmail.com'
 
 const features = [
   { icon: '⚡', title: 'Instant Play', body: 'Every game loads in your browser — no downloads, no installs, no plugins. Click and play in seconds.' },
@@ -131,12 +130,12 @@ export default function AboutPage() {
         <p className="text-slate-400 text-sm mb-4">
           Got a game suggestion, a bug report, or just want to say hi?
         </p>
-        <a
-          href={`mailto:${CONTACT_EMAIL}`}
+        <ContactLink
+          user="support"
+          domain="nexahost.top"
+          label="Contact Support"
           className="inline-block rounded-full bg-orange-500 px-6 py-2.5 font-bold text-white shadow-md transition hover:bg-orange-400 active:scale-95"
-        >
-          {CONTACT_EMAIL}
-        </a>
+        />
       </section>
     </div>
   )

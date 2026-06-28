@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import ContactLink from '@/components/ContactLink'
 
 export const metadata: Metadata = {
   title: 'Privacy Policy - NexaGames',
@@ -8,7 +9,6 @@ export const metadata: Metadata = {
 }
 
 const LAST_UPDATED = 'June 28, 2025'
-const CONTACT_EMAIL = 'muhdsapuan@gmail.com'
 const SITE_URL = 'https://fun.nexahost.top'
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -137,7 +137,7 @@ export default function PrivacyPolicyPage() {
             NexaGames is intended for a general audience. We do not knowingly collect personal information from
             children under the age of 13. If you believe a child has provided us with personal information, please
             contact us at{' '}
-            <a href={`mailto:${CONTACT_EMAIL}`} className="text-orange-500 hover:underline">{CONTACT_EMAIL}</a>{' '}
+            <ContactLink user="support" domain="nexahost.top" className="text-orange-500 hover:underline" />{' '}
             so we can delete it promptly.
           </p>
         </Section>
@@ -160,9 +160,7 @@ export default function PrivacyPolicyPage() {
         <Section title="8. Contact Us">
           <p>
             If you have any questions or concerns about this Privacy Policy, please contact us at:{' '}
-            <a href={`mailto:${CONTACT_EMAIL}`} className="font-medium text-orange-500 hover:underline">
-              {CONTACT_EMAIL}
-            </a>
+            <ContactLink user="support" domain="nexahost.top" className="font-medium text-orange-500 hover:underline" />
           </p>
         </Section>
       </div>

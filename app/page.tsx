@@ -83,9 +83,10 @@ export default function HomePage() {
       />
       <FeaturedBanner />
 
+      {/* Horizontal banner below hero */}
+      <AdBanner slot="1234567890" format="horizontal" className="mx-auto max-w-7xl px-4 pt-6 sm:px-6" />
+
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6" id="games">
-        {/* Top ad */}
-        <AdBanner slot="homepage-top" className="mb-8" />
 
         {/* Game grid with category filter */}
         <div className="mb-4 flex items-center gap-2">
@@ -99,7 +100,7 @@ export default function HomePage() {
         <GameGrid games={games} categories={categories} />
 
         {/* Mid-page ad */}
-        <AdBanner slot="homepage-mid" format="horizontal" className="mt-10" />
+        <AdBanner slot="1234567890" format="horizontal" className="mt-10" />
       </div>
     </>
   )

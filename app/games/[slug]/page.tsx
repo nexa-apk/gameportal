@@ -96,6 +96,9 @@ export default async function GamePage({ params }: Props) {
       {/* Game frame */}
       <GameFrame game={game} />
 
+      {/* Rectangle ad below game canvas */}
+      <AdBanner slot="1234567890" format="rectangle" className="mt-4" />
+
       {/* Game info */}
       <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
@@ -122,8 +125,8 @@ export default async function GamePage({ params }: Props) {
       {/* Score submission + leaderboard */}
       <ScorePanel gameSlug={game.slug} gameTitle={game.title} />
 
-      {/* Ad below game */}
-      <AdBanner slot="game-page-bottom" format="horizontal" className="mt-8" />
+      {/* Ad below score panel */}
+      <AdBanner slot="1234567890" format="horizontal" className="mt-8" />
 
       {/* Related games */}
       {related.length > 0 && (

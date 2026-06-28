@@ -22,6 +22,7 @@ export default function GameCard({ game }: { game: Game }) {
             <img
               src={game.thumbnail}
               alt={game.title}
+              loading="lazy"
               className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
               onError={() => setImgError(true)}
             />

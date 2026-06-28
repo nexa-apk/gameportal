@@ -13,6 +13,8 @@ export async function generateStaticParams() {
   return games.map((g) => ({ slug: g.slug }))
 }
 
+const BASE_URL = 'https://fun.nexahost.top'
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const game = getGame(slug)
@@ -20,10 +22,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: game.title,
     description: game.description,
+    alternates: { canonical: `${BASE_URL}/games/${slug}` },
     openGraph: {
-      title: game.title,
+      title: `${game.title} | NexaGames`,
       description: game.description,
-      images: [{ url: game.thumbnail }],
+      url: `${BASE_URL}/games/${slug}`,
+      images: [{ url: game.thumbnail, alt: game.title }],
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${game.title} | NexaGames`,
+      description: game.description,
+      images: [game.thumbnail],
     },
   }
 }
@@ -37,8 +48,40 @@ export default async function GamePage({ params }: Props) {
     .filter((g) => g.category === game.category && g.slug !== game.slug)
     .slice(0, 4)
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'VideoGame',
+    name: game.title,
+    description: game.description,
+    url: `${BASE_URL}/games/${game.slug}`,
+    image: `${BASE_URL}${game.thumbnail}`,
+    genre: game.category,
+    gamePlatform: 'Web Browser',
+    applicationCategory: 'Game',
+    operatingSystem: 'Any',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+    },
+    ...(game.rating !== undefined && {
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: game.rating,
+        bestRating: 5,
+        worstRating: 1,
+        ratingCount: game.plays ?? 100,
+      },
+    }),
+  }
+
   return (
     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Breadcrumb */}
       <nav className="mb-4 flex items-center gap-2 text-sm text-gray-500">
         <Link href="/" className="hover:text-orange-500 transition-colors">Home</Link>

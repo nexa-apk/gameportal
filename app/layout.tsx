@@ -1,21 +1,60 @@
 import type { Metadata } from 'next'
-import { Geist } from 'next/font/google'
+import { Inter, Press_Start_2P } from 'next/font/google'
 import Link from 'next/link'
 import './globals.css'
 
-const geist = Geist({ subsets: ['latin'], variable: '--font-geist' })
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const pressStart2P = Press_Start_2P({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-press-start',
+})
+
+const BASE_URL = 'https://fun.nexahost.top'
 
 export const metadata: Metadata = {
+  metadataBase: new URL(BASE_URL),
   title: {
-    default: 'FunGames — Free Online Games',
-    template: '%s | FunGames',
+    default: 'NexaGames - Free Online Games | Play Now',
+    template: '%s | NexaGames',
   },
-  description: 'Play free online games — arcade, puzzle, action and more. No downloads needed!',
-  keywords: ['free games', 'online games', 'browser games', 'arcade', 'puzzle'],
-  metadataBase: new URL('https://fun.nexahost.top'),
+  description: 'Play 19+ free online games instantly. Arcade, puzzle, action, sports games. No download needed!',
+  keywords: [
+    'free online games',
+    'browser games',
+    'play free games',
+    'arcade games',
+    'puzzle games',
+    'action games',
+    'sports games',
+    'no download games',
+    'NexaGames',
+  ],
+  authors: [{ name: 'NexaGames' }],
+  creator: 'NexaGames',
+  publisher: 'NexaGames',
+  alternates: {
+    canonical: BASE_URL,
+  },
   openGraph: {
-    siteName: 'FunGames',
+    siteName: 'NexaGames',
     type: 'website',
+    url: BASE_URL,
+    title: 'NexaGames - Free Online Games | Play Now',
+    description: 'Play 19+ free online games instantly. Arcade, puzzle, action, sports games. No download needed!',
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'NexaGames - Free Online Games' }],
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'NexaGames - Free Online Games | Play Now',
+    description: 'Play 19+ free online games instantly. No download needed!',
+    images: ['/opengraph-image'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
   },
 }
 
@@ -26,8 +65,8 @@ function Header() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
           <span className="text-2xl">🎮</span>
-          <span className="text-xl font-extrabold tracking-tight text-white">
-            Fun<span className="text-orange-400">Games</span>
+          <span className="text-xl font-extrabold tracking-tight text-white" style={{ fontFamily: 'var(--font-press-start), monospace', fontSize: '0.85rem' }}>
+            Nexa<span className="text-orange-400">Games</span>
           </span>
         </Link>
 
@@ -72,14 +111,14 @@ function Footer() {
         <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-between">
           <div className="flex items-center gap-2">
             <span className="text-xl">🎮</span>
-            <span className="font-extrabold text-white">
-              Fun<span className="text-orange-400">Games</span>
+            <span className="font-extrabold text-white" style={{ fontFamily: 'var(--font-press-start), monospace', fontSize: '0.75rem' }}>
+              Nexa<span className="text-orange-400">Games</span>
             </span>
           </div>
           <p className="text-sm text-center">
             Free browser games — no downloads, no sign-ups. Just play!
           </p>
-          <p className="text-xs">© {new Date().getFullYear()} FunGames. All rights reserved.</p>
+          <p className="text-xs">© {new Date().getFullYear()} NexaGames. All rights reserved.</p>
         </div>
       </div>
     </footer>
@@ -88,7 +127,7 @@ function Footer() {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geist.variable} antialiased`}>
+    <html lang="en" className={`${inter.variable} ${pressStart2P.variable} antialiased`}>
       <body className="flex min-h-screen flex-col bg-gray-50 font-sans text-gray-900">
         <Header />
         <main className="flex-1">{children}</main>

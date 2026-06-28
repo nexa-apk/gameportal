@@ -4,9 +4,12 @@ import GameGrid from '@/components/GameGrid'
 import AdBanner from '@/components/AdBanner'
 import { games, categories, getFeaturedGames } from '@/lib/games'
 
+const BASE_URL = 'https://fun.nexahost.top'
+
 export const metadata: Metadata = {
-  title: 'FunGames — Free Online Games',
-  description: 'Play free online arcade, puzzle and action games right in your browser. No downloads!',
+  title: 'NexaGames - Free Online Games | Play Now',
+  description: 'Play 19+ free online games instantly. Arcade, puzzle, action, sports games. No download needed!',
+  alternates: { canonical: BASE_URL },
 }
 
 function FeaturedBanner() {
@@ -30,6 +33,7 @@ function FeaturedBanner() {
                 <img
                   src={game.thumbnail}
                   alt={game.title}
+                  loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
@@ -54,9 +58,29 @@ function FeaturedBanner() {
   )
 }
 
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'NexaGames',
+  url: BASE_URL,
+  description: 'Play 19+ free online games instantly. Arcade, puzzle, action, sports games. No download needed!',
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: `${BASE_URL}/#games?q={search_term_string}`,
+    },
+    'query-input': 'required name=search_term_string',
+  },
+}
+
 export default function HomePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+      />
       <FeaturedBanner />
 
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6" id="games">

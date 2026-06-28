@@ -130,6 +130,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${inter.variable} ${pressStart2P.variable} antialiased`}>
       <head>
+        <meta name="google-adsense-account" content="ca-pub-9172954381668177" />
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9172954381668177"

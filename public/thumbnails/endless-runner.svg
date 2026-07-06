@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#1a1a2e"/>
+  <rect x="0" y="260" width="400" height="40" fill="#00ff88"/>
+  <rect x="80" y="210" width="30" height="50" fill="#00cfff"/>
+  <rect x="220" y="240" width="25" height="60" fill="#ff4444"/>
+  <rect x="320" y="220" width="60" height="30" fill="#ffaa00"/>
+  <text x="200" y="180" font-family="monospace" font-size="28" fill="white" text-anchor="middle" font-weight="bold">ENDLESS</text>
+  <text x="200" y="210" font-family="monospace" font-size="18" fill="#00ff88" text-anchor="middle">RUNNER</text>
+</svg>

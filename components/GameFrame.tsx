@@ -23,6 +23,8 @@ const gameComponentMap: Record<string, React.ComponentType> = {
   MemoryMatchGame: dynamic(() => import('@/components/games/MemoryMatchGame'), { ssr: false, loading: () => <GameLoading /> }),
   WhackAMole: dynamic(() => import('@/components/games/WhackAMole'), { ssr: false, loading: () => <GameLoading /> }),
   ColorSwitch: dynamic(() => import('@/components/games/ColorSwitch'), { ssr: false, loading: () => <GameLoading /> }),
+  Pool8: dynamic(() => import('@/components/games/Pool8'), { ssr: false, loading: () => <GameLoading /> }),
+  GemBlast: dynamic(() => import('@/components/games/GemBlast'), { ssr: false, loading: () => <GameLoading /> }),
 }
 
 function GameLoading() {

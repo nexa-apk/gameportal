@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { Game, formatPlays } from '@/lib/games'
+import { Game } from '@/lib/games'
 
 export default function GameCard({ game }: { game: Game }) {
   const [imgError, setImgError] = useState(false)
@@ -47,13 +47,10 @@ export default function GameCard({ game }: { game: Game }) {
           <p className="mt-0.5 text-xs text-gray-500 line-clamp-2 leading-relaxed">
             {game.description}
           </p>
-          <div className="mt-2 flex items-center justify-between">
+          <div className="mt-2">
             <span className={`rounded-full px-2 py-0.5 text-xs font-medium capitalize ${categoryColors[game.category] ?? 'bg-gray-100 text-gray-600'}`}>
               {game.category}
             </span>
-            {game.plays !== undefined && (
-              <span className="text-xs text-gray-400">{formatPlays(game.plays)} plays</span>
-            )}
           </div>
         </div>
       </div>

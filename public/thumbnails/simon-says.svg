@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#111122"/>
+  <rect x="30" y="80" width="155" height="130" rx="8" fill="#00cc44"/>
+  <rect x="215" y="80" width="155" height="130" rx="8" fill="#cc2200"/>
+  <rect x="30" y="220" width="155" height="50" rx="8" fill="#ccaa00" opacity="0.4"/>
+  <rect x="215" y="220" width="155" height="50" rx="8" fill="#0044cc" opacity="0.4"/>
+  <text x="200" y="50" font-family="monospace" font-size="28" fill="white" text-anchor="middle" font-weight="bold">SIMON SAYS</text>
+</svg>

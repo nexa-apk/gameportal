@@ -5,7 +5,8 @@ import GameFrame from '@/components/GameFrame'
 import GameCard from '@/components/GameCard'
 import AdBanner from '@/components/AdBanner'
 import ScorePanel from '@/components/ScorePanel'
-import { getGame, games, formatPlays } from '@/lib/games'
+import { getGame, games } from '@/lib/games'
+import gameContent from '@/lib/gameContent'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -109,9 +110,6 @@ export default async function GamePage({ params }: Props) {
             </span>
           </div>
           <p className="mt-1 text-gray-600">{game.description}</p>
-          {game.plays !== undefined && (
-            <p className="mt-1 text-sm text-gray-400">🎮 {formatPlays(game.plays)} plays</p>
-          )}
         </div>
 
         <a
@@ -124,6 +122,43 @@ export default async function GamePage({ params }: Props) {
 
       {/* Score submission + leaderboard */}
       <ScorePanel gameSlug={game.slug} gameTitle={game.title} />
+
+      {/* Game content: How to Play / About / Tips */}
+      {gameContent[game.slug] && (() => {
+        const content = gameContent[game.slug]
+        return (
+          <section className="mt-10 space-y-6">
+            <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+              <h2 className="mb-3 text-xl font-black text-gray-900">How to Play {game.title}</h2>
+              <ul className="space-y-2">
+                {content.howToPlay.map((step, i) => (
+                  <li key={i} className="flex gap-3 text-gray-600 leading-relaxed">
+                    <span className="mt-0.5 flex-shrink-0 text-orange-500 font-bold">{i + 1}.</span>
+                    <span>{step}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+              <h2 className="mb-3 text-xl font-black text-gray-900">About {game.title}</h2>
+              <p className="text-gray-600 leading-relaxed">{content.about}</p>
+            </div>
+
+            <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+              <h2 className="mb-3 text-xl font-black text-gray-900">Tips &amp; Strategy</h2>
+              <ul className="space-y-2">
+                {content.tips.map((tip, i) => (
+                  <li key={i} className="flex gap-3 text-gray-600 leading-relaxed">
+                    <span className="mt-0.5 flex-shrink-0 text-orange-500">★</span>
+                    <span>{tip}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        )
+      })()}
 
       {/* Ad below score panel */}
       <AdBanner slot="1234567890" format="horizontal" className="mt-8" />

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#0a0a1a"/>
+  <rect x="0" y="240" width="400" height="3" fill="#ff3300" opacity="0.6"/>
+  <text x="80" y="100" font-family="monospace" font-size="22" fill="#ffdd00">ROCKET</text>
+  <text x="220" y="150" font-family="monospace" font-size="22" fill="white">SPEED</text>
+  <text x="60" y="200" font-family="monospace" font-size="22" fill="#ff4444">COMBO</text>
+  <rect x="30" y="255" width="340" height="30" rx="4" fill="#111133"/>
+  <text x="200" y="275" font-family="monospace" font-size="18" fill="#00ff88" text-anchor="middle">TYPE HERE|</text>
+  <text x="200" y="35" font-family="monospace" font-size="22" fill="white" text-anchor="middle" font-weight="bold">TYPING SPEED</text>
+</svg>

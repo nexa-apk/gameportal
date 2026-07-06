@@ -86,6 +86,8 @@ export default function HomePage() {
       {/* Horizontal banner below hero */}
       <AdBanner slot="1234567890" format="horizontal" className="mx-auto max-w-7xl px-4 pt-6 sm:px-6" />
 
+      {/* Flash games promo banner disabled — section temporarily hidden */}
+
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6" id="games">
 
         {/* Game grid with category filter */}

@@ -31,7 +31,7 @@ export default function GemBlast() {
       if (!isMounted || !containerRef.current || gameRef.current) return
 
       class GameScene extends Phaser.Scene {
-        private grid!: number[][]         // color index 0-5, or -1 for empty
+        private grid: number[][] = []      // color index 0-5, or -1 for empty; populated in create()
         private gfx!: Phaser.GameObjects.Graphics
         private scoreText!: Phaser.GameObjects.Text
         private movesText!: Phaser.GameObjects.Text
@@ -68,6 +68,8 @@ export default function GemBlast() {
 
         create() {
           this.cameras.main.setBackgroundColor('#0a0a1a')
+          // grid must be initialized before update()/draw() fire on the first frame
+          this.grid = Array.from({ length: ROWS }, () => new Array(COLS).fill(-1))
           this.gfx = this.add.graphics()
 
           this.scoreText = this.add.text(14, 14, 'Score: 0', {

@@ -122,7 +122,9 @@ function Footer() {
           <div className="flex flex-col items-center gap-2 sm:items-end">
             <nav className="flex items-center gap-4 text-xs">
               <Link href="/about" className="hover:text-white transition-colors">About</Link>
+              <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
               <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+              <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
             </nav>
             <p className="text-xs">© {new Date().getFullYear()} NexaGames. All rights reserved.</p>
           </div>

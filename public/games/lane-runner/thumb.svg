@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#4b5162"/>
+  <!-- lane dashes -->
+  <g fill="#f1c40f">
+    <rect x="131" y="10" width="7" height="40"/><rect x="131" y="70" width="7" height="40"/><rect x="131" y="130" width="7" height="40"/><rect x="131" y="190" width="7" height="40"/>
+    <rect x="262" y="10" width="7" height="40"/><rect x="262" y="70" width="7" height="40"/><rect x="262" y="130" width="7" height="40"/><rect x="262" y="190" width="7" height="40"/>
+  </g>
+  <!-- road edges -->
+  <rect x="8" y="0" width="6" height="248" fill="#ced6e0" opacity="0.6"/>
+  <rect x="386" y="0" width="6" height="248" fill="#ced6e0" opacity="0.6"/>
+  <!-- cones -->
+  <polygon points="200,40 224,88 176,88" fill="#e67e22"/>
+  <rect x="187" y="66" width="26" height="7" fill="#ffffff"/>
+  <polygon points="332,120 356,168 308,168" fill="#e67e22"/>
+  <rect x="319" y="146" width="26" height="7" fill="#ffffff"/>
+  <!-- player blob -->
+  <ellipse cx="66" cy="212" rx="30" ry="12" fill="#000000" opacity="0.18"/>
+  <circle cx="66" cy="196" r="26" fill="#2ecc71"/>
+  <circle cx="58" cy="190" r="7" fill="#ffffff"/><circle cx="75" cy="190" r="7" fill="#ffffff"/>
+  <circle cx="59" cy="191" r="3.5" fill="#20232b"/><circle cx="77" cy="191" r="3.5" fill="#20232b"/>
+  <rect x="0" y="248" width="400" height="52" fill="#20232b"/>
+  <text x="200" y="282" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#f1c40f" text-anchor="middle">Lane Runner</text>
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="lav" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#eef2ff"/>
+      <stop offset="100%" style="stop-color:#dfe4ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#lav)"/>
+  <polygon points="200,40 233,105 167,105" fill="#e74c3c"/>
+  <g>
+    <rect x="45" y="140" width="94" height="94" rx="12" fill="#ffffff" stroke="#d6dbf5" stroke-width="3"/>
+    <circle cx="92" cy="187" r="30" fill="#3498db"/>
+    <rect x="153" y="140" width="94" height="94" rx="12" fill="#ffffff" stroke="#2ecc71" stroke-width="4"/>
+    <polygon points="200,160 224,214 176,214" fill="#f1c40f"/>
+    <rect x="261" y="140" width="94" height="94" rx="12" fill="#ffffff" stroke="#d6dbf5" stroke-width="3"/>
+    <rect x="278" y="165" width="60" height="44" fill="#9b59b6"/>
+  </g>
+  <rect x="0" y="248" width="400" height="52" fill="#6c5ce7"/>
+  <text x="200" y="282" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#ffffff" text-anchor="middle">Shape Match</text>
+</svg>

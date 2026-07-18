@@ -525,6 +525,78 @@ const gameContent: Record<string, GameContent> = {
       'On a touchscreen, keep your finger just above the basket so your hand never blocks your view of the falling items.',
     ],
   },
+
+  'piano-tiles': {
+    howToPlay: [
+      'Colored tiles scroll down the screen in four lanes.',
+      'Tap the colored tile in each row — one lane in every row is coloured.',
+      'Work from the bottom upward: always tap the lowest coloured tile next.',
+      'If you tap the wrong lane, or let a coloured tile slip off the bottom, the game ends.',
+      'Every correct tap scores a point and the tiles speed up a little.',
+    ],
+    about: `Piano Tiles is one of the most successful mobile game formats of the 2010s — the original "Don't Tap the White Tile" became a worldwide sensation by reducing a game to a single, perfectly clear rule: hit the black tiles, never the white ones. That clarity is what makes the genre so accessible to children and newcomers; there is nothing to read, no strategy to learn, just a stream of targets and the simple instruction to tap them in order. Underneath the simplicity is a genuine test of reaction speed and sustained focus. Because the tiles accelerate as your score climbs, every run becomes a gradually tightening challenge that ends the instant your attention slips, which produces the "just one more try" pull that defines the format. This version keeps the friendly essentials — four lanes, brightly coloured tiles, and a clean white board — while removing anything that might frustrate a young player, so the only thing standing between them and a new high score is how quickly and accurately they can tap.`,
+    tips: [
+      'Keep your eyes near the bottom of the board where the next tile to tap appears.',
+      'Rest a finger or thumb over each side of the screen so you can reach any lane instantly.',
+      'Tap in a steady rhythm rather than rushing — most misses come from panicking as the speed rises.',
+      'Do not look at the tile you are tapping; look ahead to the next one so you are always prepared.',
+      'If you feel overwhelmed, slow your breathing — a calm, even tapping pace beats frantic stabbing.',
+    ],
+  },
+
+  'shape-match': {
+    howToPlay: [
+      'A single shape appears near the top of the screen.',
+      'Three cards below show different shapes, each in its own colour.',
+      'Tap the card whose shape matches the one at the top.',
+      'The colours may be different — match by the shape, not the colour.',
+      'A correct match scores a point; a wrong one costs a life. You have three lives.',
+    ],
+    about: `Shape Match is built around one of the earliest and most important skills a young child develops: visual discrimination, the ability to notice how one form differs from another. Long before children can read or count reliably, they can learn to tell a circle from a square or a star from a triangle, and matching games like this one turn that learning into play. Educators have used shape-sorting activities for generations precisely because recognising and naming shapes lays groundwork for later skills, from letter recognition to geometry. By deliberately giving the shapes different colours, this version pushes the player to focus on form rather than taking the shortcut of matching by colour — a small design choice that makes the game a genuine shape-recognition exercise rather than a colour-matching one. The three-lives structure keeps the stakes gentle and forgiving, so a child can make a mistake or two and keep playing, while the steadily growing score gives them a clear, encouraging sense of progress.`,
+    tips: [
+      'Name the top shape out loud — "star" or "square" — before you look at the cards.',
+      'Ignore the colours completely; they are there to trick you into a wrong tap.',
+      'Look at the corners: a triangle has three, a square four, a diamond sits on its point.',
+      'There is no timer, so take a moment to be sure before you tap.',
+      'A star and a diamond are the two most confused shapes — count the points to be certain.',
+    ],
+  },
+
+  'basketball-shoot': {
+    howToPlay: [
+      'A hoop slides left and right across the top of the court.',
+      'The ball sits at the bottom, right in the middle.',
+      'Tap anywhere to shoot the ball straight up.',
+      'You score a basket if the hoop is directly above the ball at the moment your shot reaches it.',
+      'Sink as many baskets as you can before the 60-second timer runs out.',
+    ],
+    about: `Basketball has been one of the most popular subjects for simple video games since the earliest days of the arcade, and the appeal of a quick "shoot the hoops" game has never really faded — the pop-a-shot arcade cabinet and countless phone versions all tap into the same satisfying loop of aim, release, and score. What makes a shooting game work as a pure skill test is timing: strip away the running and passing of a full basketball game and you are left with the single most rewarding moment, the swish of a made shot. This version turns that moment into a rhythm-and-timing challenge. Because the ball always rises straight up and the hoop drifts steadily from side to side, success depends entirely on reading the hoop's motion and releasing at exactly the right instant — a skill that improves noticeably with practice, which is what keeps a player coming back to beat their last total. The moving hoop speeds up as you score, gently raising the challenge so that a good run feels genuinely earned.`,
+    tips: [
+      'Do not shoot when the hoop is at the edges — wait for it to swing back toward the middle.',
+      'Tap a fraction of a second before the hoop reaches the centre, since the ball takes time to rise.',
+      'Watch the hoop for a few swings before your first shot to learn its rhythm.',
+      'The hoop moves fastest as it crosses the centre, so time that crossing carefully.',
+      'As your score climbs the hoop speeds up — shorten your timing to match the quicker swing.',
+    ],
+  },
+
+  'lane-runner': {
+    howToPlay: [
+      'Your character runs forward automatically down a three-lane road.',
+      'Tap the left side of the screen to move one lane left, the right side to move right.',
+      'You can also use the Left and Right arrow keys on a keyboard.',
+      'Dodge the orange cones by switching out of their lane before you reach them.',
+      'The longer you survive, the higher your score — but the road speeds up as you go.',
+    ],
+    about: `The endless runner is one of the defining game genres of the smartphone era, popularised by titles like Temple Run and Subway Surfers that turned a single continuous dash into a global pastime. Its brilliance lies in compressing an entire game into one uninterrupted flow: there are no levels to load and no menus to navigate, just a character that never stops moving and a player who must react to whatever comes next. That structure is a natural fit for young players and quick sessions alike, because the rules are visible in the first two seconds of play — move out of the way of the obstacles. This version distils the genre to its cleanest form with three fixed lanes and a single type of obstacle, removing the fiddly jumps and slides of larger runners so that the whole game rests on one clear decision made over and over: which lane is safe? As the speed steadily rises, the gaps between decisions shrink, building the escalating tension that makes an endless runner so hard to put down while never becoming unfair.`,
+    tips: [
+      'Look ahead to the top of the road, not at your character, so you spot cones early.',
+      'Move only when you need to — unnecessary lane changes can put you into the path of the next cone.',
+      'The middle lane gives you the most options, so return to it when the road is clear.',
+      'React to the lowest cone first; deal with one obstacle at a time rather than planning too far ahead.',
+      'As the speed builds, make your lane switches earlier — hesitating even a moment gets harder to recover from.',
+    ],
+  },
 }
 
 export default gameContent

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="pink" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fff0f3"/>
+      <stop offset="100%" style="stop-color:#ffd9e4"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#pink)"/>
+  <text x="110" y="130" font-size="72" text-anchor="middle">✊</text>
+  <text x="200" y="120" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#b2bec3" text-anchor="middle">VS</text>
+  <text x="290" y="130" font-size="72" text-anchor="middle">✌️</text>
+  <g>
+    <rect x="70" y="155" width="72" height="72" rx="12" fill="#ffffff" stroke="#fab1c9" stroke-width="3"/>
+    <text x="106" y="205" font-size="40" text-anchor="middle">✊</text>
+    <rect x="164" y="155" width="72" height="72" rx="12" fill="#ffffff" stroke="#fab1c9" stroke-width="3"/>
+    <text x="200" y="205" font-size="40" text-anchor="middle">✋</text>
+    <rect x="258" y="155" width="72" height="72" rx="12" fill="#ffffff" stroke="#fab1c9" stroke-width="3"/>
+    <text x="294" y="205" font-size="40" text-anchor="middle">✌️</text>
+  </g>
+  <rect x="0" y="248" width="400" height="52" fill="#e84393"/>
+  <text x="200" y="282" font-family="Arial, sans-serif" font-size="25" font-weight="bold" fill="#ffffff" text-anchor="middle">Rock Paper Scissors</text>
+</svg>

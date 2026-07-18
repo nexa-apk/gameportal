@@ -597,6 +597,78 @@ const gameContent: Record<string, GameContent> = {
       'As the speed builds, make your lane switches earlier — hesitating even a moment gets harder to recover from.',
     ],
   },
+
+  'odd-one-out': {
+    howToPlay: [
+      'The screen fills with tiles that are all the same colour — except one.',
+      'That one tile is a slightly different shade. Find it and tap it.',
+      'Each correct tap scores a point and starts a new, harder round.',
+      'The grid grows larger and the odd colour gets closer to the others as you go.',
+      'A wrong tap costs a life. You have three lives.',
+    ],
+    about: `Odd One Out is a spot-the-difference game built around colour perception, a skill that sits at the very foundation of how we see the world. The human eye is remarkably good at detecting contrast, and this game turns that ability into a gentle, escalating challenge by making the difference between the odd tile and its neighbours smaller and smaller. For young children the early rounds — a bright odd tile among just four — are an easy, confidence-building win, while the later rounds, with a five-by-five grid and a barely-there colour shift, become a genuine test of visual acuity that adults enjoy too. Games of this type have quietly become a staple of the casual puzzle world because they deliver a very pure kind of satisfaction: the little "there it is!" moment when a hidden difference suddenly pops into focus. There is no reading, no counting and no complicated rules, which makes it one of the most universally accessible puzzle formats and a natural fit for the youngest players, while the shrinking colour gap keeps it quietly demanding for everyone else.`,
+    tips: [
+      'Let your eyes go slightly soft and scan the whole grid rather than staring at one tile.',
+      'The odd tile often "pops" when you glance across the grid quickly instead of studying it.',
+      'On larger grids, sweep row by row so you do not lose track of where you have looked.',
+      'If you are stuck, tilt your head or look slightly away — peripheral vision catches subtle contrast well.',
+      'Do not rush and waste a life on a guess; there is no timer, so accuracy matters more than speed.',
+    ],
+  },
+
+  'rock-paper-scissors': {
+    howToPlay: [
+      'Tap rock, paper or scissors to make your move.',
+      'The computer picks at the same time, and the winner is revealed.',
+      'Rock beats scissors, scissors beats paper, and paper beats rock.',
+      'Every win adds one to your streak; a tie lets you play the round again.',
+      'A single loss ends the game — so how long can your winning streak last?',
+    ],
+    about: `Rock Paper Scissors is one of the oldest and most widespread games in the world, with roots that historians trace back to hand games played in China over two thousand years ago before it spread through Japan and eventually across the globe. Its endurance comes from perfect simplicity: three choices, a neat cycle in which each option beats one and loses to another, and no equipment beyond a hand. That elegant balance makes it genuinely fair — with no way to guarantee a win, it has been used for centuries to settle disputes and make decisions, and it is often a child's first experience of probability and bluffing. Against a computer that chooses at random, the game becomes a pure test of luck and nerve, which is exactly what makes chasing a long winning streak so thrilling: each round you survive raises the stakes, and the tension of risking a big streak on a single fifty-fifty call is the whole appeal. It is instantly understood by players of any age, which is why it remains a perennial favourite in playgrounds and apps alike.`,
+    tips: [
+      'The computer plays completely at random, so no pattern can be predicted — trust your gut.',
+      'A tie is a free retry, so it never hurts your streak; only a loss ends the game.',
+      'Try not to fall into habits like always opening with rock — mix your choices up.',
+      'Longer streaks are pure nerve: decide quickly and do not overthink a coin-flip.',
+      'Treat every round as its own fresh fifty-fifty; a long streak does not make the next win any harder.',
+    ],
+  },
+
+  'keepy-uppy': {
+    howToPlay: [
+      'Tap the ball to knock it upward into the air.',
+      'Each successful tap on the ball scores a point.',
+      'Do not let the ball touch the ground — that ends the game.',
+      'The ball drifts sideways and bounces off the walls, so keep chasing it.',
+      'It falls faster the longer you keep it up, so your taps must get quicker.',
+    ],
+    about: `Keepy-uppy — the simple challenge of keeping a ball off the ground using nothing but well-timed touches — is a game almost every child invents on their own with a real balloon or ball. Turning it into a tapping game captures that same timeless appeal: a single object, a single rule, and an ever-present risk of dropping it. What makes it so satisfying is the tight feedback loop between the player and the ball; every tap is an immediate, physical-feeling response, and the rising tension as the ball drifts toward a wall or picks up speed keeps the player leaning in. Because success depends on hand-eye coordination and timing rather than any learned strategy, it is accessible to very young players from the first second, yet the gradually increasing fall speed means a high score is always a genuine achievement. The sideways drift and wall bounces add just enough unpredictability that no two rallies feel the same, and the "just one more go" pull of trying to beat your last count is exactly the hook that has made this style of one-touch arcade game endure.`,
+    tips: [
+      'Tap the ball near the top of its arc rather than letting it fall too far first.',
+      'Watch the sideways drift — move your aim to where the ball is heading, not where it is.',
+      'Use the walls to your advantage; a ball bouncing off a wall is easy to line up.',
+      'As the speed climbs, tap in a steady quick rhythm instead of waiting for the perfect moment.',
+      'Keep the ball toward the middle of the screen so you always have room to react.',
+    ],
+  },
+
+  'number-tap': {
+    howToPlay: [
+      'A grid of numbers appears in a jumbled order.',
+      'Tap the numbers in order, starting from 1, then 2, then 3, and so on.',
+      'Each correct number turns green and scores a point.',
+      'Clear the whole grid to earn bonus time and a fresh, reshuffled grid.',
+      'A wrong tap costs you time. Keep going until the clock runs out!',
+    ],
+    about: `Number Tap is a "find the numbers in order" game — a format closely related to the Schulte table, a grid of shuffled numbers that psychologists have used for decades to measure and train visual attention and search speed. The task sounds trivial: just tap 1, 2, 3 and so on. In practice it exercises several skills at once — number recognition, sequencing, and the ability to scan a busy field and quickly locate a specific target — which is exactly why it is such a valuable little game for young learners still cementing their numbers. For a child, hunting down the next number in a colourful grid turns counting practice into a race against the clock rather than a chore, and the immediate green flash of a correct tap provides constant encouragement. Adults use the same exercise to sharpen peripheral vision and reading speed, so the game quietly works for every age. The countdown timer and the bonus time awarded for clearing a grid create a satisfying push-and-pull of risk and reward that keeps players reaching for one more number.`,
+    tips: [
+      'Do not stare at the centre — let your eyes take in the whole grid so numbers jump out.',
+      'While tapping the current number, start hunting for the next one so you never pause.',
+      'Wrong taps cost time, so glance twice before tapping when the grid is busy.',
+      'Clearing a whole grid refills the clock, so keep your rhythm going to bank that bonus time.',
+      'Try to keep a loose mental map of where higher numbers sit as you spot them early.',
+    ],
+  },
 }
 
 export default gameContent

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="sky2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#eaf8ff"/>
+      <stop offset="100%" style="stop-color:#d6f0ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#sky2)"/>
+  <rect x="0" y="212" width="400" height="36" fill="#7bc86c"/>
+  <rect x="0" y="212" width="400" height="7" fill="#63b054"/>
+  <!-- dashed bounce path -->
+  <path d="M120 200 Q 200 60 280 190" fill="none" stroke="#3498db" stroke-width="3" stroke-dasharray="7 8" opacity="0.6"/>
+  <ellipse cx="200" cy="206" rx="34" ry="8" fill="#000000" opacity="0.12"/>
+  <!-- ball -->
+  <circle cx="200" cy="120" r="40" fill="#e74c3c" stroke="#c0392b" stroke-width="3"/>
+  <circle cx="200" cy="120" r="25" fill="#ffffff"/>
+  <circle cx="200" cy="120" r="13" fill="#f1c40f"/>
+  <circle cx="188" cy="108" r="9" fill="#ffffff" opacity="0.5"/>
+  <rect x="0" y="248" width="400" height="52" fill="#1c3d5a"/>
+  <text x="200" y="282" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#ffffff" text-anchor="middle">Keepy Uppy</text>
+</svg>

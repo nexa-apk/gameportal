@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="mint" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#eafaf1"/>
+      <stop offset="100%" style="stop-color:#c9f0dd"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#mint)"/>
+  <g>
+    <rect x="70" y="40" width="64" height="68" rx="10" fill="#ffffff" stroke="#f1c40f" stroke-width="3"/>
+    <text x="102" y="90" font-size="38" text-anchor="middle">🐶</text>
+    <rect x="168" y="40" width="64" height="68" rx="10" fill="#1abc9c" stroke="#ffffff" stroke-width="3"/>
+    <text x="200" y="88" font-size="34" font-weight="bold" fill="#ffffff" text-anchor="middle">?</text>
+    <rect x="266" y="40" width="64" height="68" rx="10" fill="#ffffff" stroke="#2ecc71" stroke-width="3"/>
+    <text x="298" y="90" font-size="38" text-anchor="middle">🦊</text>
+    <rect x="70" y="128" width="64" height="68" rx="10" fill="#1abc9c" stroke="#ffffff" stroke-width="3"/>
+    <text x="102" y="176" font-size="34" font-weight="bold" fill="#ffffff" text-anchor="middle">?</text>
+    <rect x="168" y="128" width="64" height="68" rx="10" fill="#ffffff" stroke="#2ecc71" stroke-width="3"/>
+    <text x="200" y="178" font-size="38" text-anchor="middle">🐼</text>
+    <rect x="266" y="128" width="64" height="68" rx="10" fill="#1abc9c" stroke="#ffffff" stroke-width="3"/>
+    <text x="298" y="176" font-size="34" font-weight="bold" fill="#ffffff" text-anchor="middle">?</text>
+  </g>
+  <rect x="0" y="248" width="400" height="52" fill="#16a085"/>
+  <text x="200" y="282" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#ffffff" text-anchor="middle">Animal Match</text>
+</svg>

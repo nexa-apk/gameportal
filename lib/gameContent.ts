@@ -453,6 +453,78 @@ const gameContent: Record<string, GameContent> = {
       'When moves run low (five or fewer), the board edge pulses red — at that point focus on any valid swap rather than hunting for long matches.',
     ],
   },
+
+  'balloon-pop': {
+    howToPlay: [
+      'Tap or click a balloon to pop it before it floats off the top of the screen.',
+      'Each ordinary balloon is worth 1 point; the rarer gold balloons are worth 5.',
+      'Balloons rise faster and spawn more often as your score climbs, so keep your eyes moving.',
+      'The round lasts 60 seconds — pop as many as you can before the timer reaches zero.',
+      'When time runs out your score is recorded. Tap PLAY to try to beat it.',
+    ],
+    about: `Balloon Pop belongs to a family of "tap-to-clear" games that became hugely popular on touchscreens because they translate a simple real-world joy — popping a balloon — into an instantly understandable digital action. There is no manual to read and no controls to learn: you see a balloon, you tap it, it pops with a satisfying burst. That immediacy is exactly why games of this style are among the first that very young children can play unaided, and why they remain a staple of educational and casual game collections. Beneath the simplicity sits a gentle skill curve built entirely around hand-eye coordination and prioritisation. As the spawn rate rises the player must decide in a fraction of a second which balloon to reach for, and the occasional high-value gold balloon introduces a small risk-reward choice: chase the bonus, or clear the easy points in front of you. This version keeps the presentation bright and friendly — a clear blue sky, drifting clouds, and a countdown timer that turns red in its final seconds to build a little excitement without ever feeling stressful.`,
+    tips: [
+      'Pop balloons near the top of the screen first — they are the closest to escaping and being lost.',
+      'Always divert to gold balloons when one appears; a single gold is worth five ordinary pops.',
+      'Use two thumbs on a touchscreen so you can clear both sides of the screen at once.',
+      'Do not tunnel-vision on one balloon — keep your eyes scanning the whole sky for the next target.',
+      'In the final ten seconds go for volume: tap quickly and steadily rather than aiming for perfect pops.',
+    ],
+  },
+
+  'kids-math': {
+    howToPlay: [
+      'Read the sum shown in the middle of the screen — it will be an addition or a subtraction.',
+      'Three answer buttons appear below it; tap the one you think is correct.',
+      'A correct answer scores a point and brings up the next, slightly harder sum.',
+      'A wrong answer costs you one of your three hearts.',
+      'The game ends when all three hearts are gone — try to solve as many sums as you can!',
+    ],
+    about: `Kids Math sits in the long and well-studied tradition of "drill and practice" educational games, a category that researchers have found genuinely effective for building arithmetic fluency in early learners. The core idea is simple: repeated, low-pressure exposure to number facts helps them move from slow, effortful counting to fast, automatic recall. What a game adds over a worksheet is immediate feedback and a light layer of motivation — a score to grow, hearts to protect, and a cheerful "Correct!" the moment a child gets an answer right. This version starts with small addition problems and gradually introduces subtraction and larger numbers as the player's score rises, a pacing approach known as adaptive difficulty that keeps the challenge in the sweet spot between boring and frustrating. The three-answer multiple-choice format is deliberate: it keeps young children reading and comparing numbers rather than being blocked by having to type, and the wrong answers are chosen to be close to the right one so that a child has to actually work out the sum rather than guess by size alone.`,
+    tips: [
+      'For addition, count on from the larger number — it is faster than starting from the smaller one.',
+      'For subtraction, think "what do I add to the small number to reach the big one?"',
+      'The wrong answers are usually close to the right one, so double-check before you tap.',
+      'Do not rush — there is no timer, so accuracy matters far more than speed here.',
+      'If you lose a heart, stay calm; a steady run of correct answers will quickly rebuild your score.',
+    ],
+  },
+
+  'animal-match': {
+    howToPlay: [
+      'All sixteen cards start face down, showing a question mark.',
+      'Tap a card to flip it over and reveal the animal hiding underneath.',
+      'Tap a second card to try to find its matching pair.',
+      'If the two animals match they stay face up; if they do not, both flip back over.',
+      'Find all eight pairs to win — and try to do it in as few moves as possible!',
+    ],
+    about: `Animal Match is a classic concentration game — the same "turn two cards and find the pair" format that has been played with physical cards for well over a century and that child-development specialists still recommend today. Its enduring place in early education is no accident: matching games are one of the most reliable ways to exercise a young child's short-term visual memory, because success depends entirely on remembering where a picture was seen a few moves earlier. Each turn is a tiny memory test, and because the feedback is instant and the theme is friendly, children happily repeat that test dozens of times in a single sitting. Choosing animals as the picture set adds a second layer of value — recognising and naming the dog, cat, fox or panda turns the game into gentle vocabulary practice alongside the memory work. This version uses a four-by-four grid of eight pairs, a size large enough to be a real challenge for the memory yet small enough that a determined young player can clear the whole board, and it counts your moves so that older children can turn it into a personal challenge to beat their own best.`,
+    tips: [
+      'Start by flipping cards in a steady order so you build a mental map of where each animal sits.',
+      'When you reveal a new animal, take a moment to note its position before moving on.',
+      'If you have already seen an animal, go straight for its partner rather than flipping at random.',
+      'Work along rows or columns rather than jumping around — it is far easier to remember an orderly search.',
+      'Fewer moves means a higher score, so patience and memory beat fast random guessing every time.',
+    ],
+  },
+
+  'catch-the-fruit': {
+    howToPlay: [
+      'Move the basket left and right along the bottom of the screen.',
+      'Drag with your finger or mouse, or use the Left and Right arrow keys.',
+      'Catch the falling fruit to score a point for each piece.',
+      'Avoid the dark bombs — catching one costs you a life, and you only have three.',
+      'The fruit falls faster and faster as your score grows. The game ends when your lives run out.',
+    ],
+    about: `Catch the Fruit is a modern take on the "catcher" genre, one of the oldest and most intuitive video game formats in existence — the idea of steering a paddle or basket to catch falling objects dates back to the earliest days of arcade gaming in the 1970s. Its staying power comes from how naturally it maps onto a single, continuous skill: tracking a moving object and positioning yourself to intercept it. Because that skill is something children practise constantly in the physical world, a catcher game feels immediately familiar even to a player who has never held a controller. The design introduces a clean risk element in the form of bombs, which transforms the game from a passive catch-everything exercise into a series of quick decisions — is that falling object worth reaching for, or should I stay clear? As the fall speed ramps up with the score, the window for each of those decisions narrows, producing a difficulty curve that rewards calm, anticipatory movement over frantic reaction. Bright fruit, a friendly wooden basket, and a simple three-life structure keep the whole experience welcoming for younger players while still offering a satisfying high-score chase for anyone who wants to master it.`,
+    tips: [
+      'Watch the top of the screen, not the basket — reading where fruit spawns gives you time to line up the catch.',
+      'Move to where the fruit will land, then wait there rather than chasing it down.',
+      'When a bomb and a fruit fall close together, give up the fruit — a life is worth far more than one point.',
+      'Small, early adjustments beat big last-second dashes as the speed increases.',
+      'On a touchscreen, keep your finger just above the basket so your hand never blocks your view of the falling items.',
+    ],
+  },
 }
 
 export default gameContent

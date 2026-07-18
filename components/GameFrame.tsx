@@ -25,6 +25,10 @@ const gameComponentMap: Record<string, React.ComponentType> = {
   ColorSwitch: dynamic(() => import('@/components/games/ColorSwitch'), { ssr: false, loading: () => <GameLoading /> }),
   Pool8: dynamic(() => import('@/components/games/Pool8'), { ssr: false, loading: () => <GameLoading /> }),
   GemBlast: dynamic(() => import('@/components/games/GemBlast'), { ssr: false, loading: () => <GameLoading /> }),
+  BalloonPop: dynamic(() => import('@/components/games/BalloonPop'), { ssr: false, loading: () => <GameLoading /> }),
+  KidsMath: dynamic(() => import('@/components/games/KidsMath'), { ssr: false, loading: () => <GameLoading /> }),
+  AnimalMatch: dynamic(() => import('@/components/games/AnimalMatch'), { ssr: false, loading: () => <GameLoading /> }),
+  CatchTheFruit: dynamic(() => import('@/components/games/CatchTheFruit'), { ssr: false, loading: () => <GameLoading /> }),
 }
 
 function GameLoading() {

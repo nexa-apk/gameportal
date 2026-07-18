@@ -45,7 +45,9 @@ export default function ShapeMatch() {
 
         create() {
           this.cameras.main.setBackgroundColor('#eef2ff')
+          // depth 2 so option shapes render ON TOP of the white cards (depth 1)
           this.gfx = this.add.graphics()
+          this.gfx.setDepth(2)
 
           this.scoreText = this.add.text(14, 14, 'Score: 0', {
             fontSize: '18px', color: '#6c5ce7', fontFamily: 'monospace', fontStyle: 'bold',

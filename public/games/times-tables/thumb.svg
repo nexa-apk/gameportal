@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="lav2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f5eaff"/>
+      <stop offset="100%" style="stop-color:#e6d0fa"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#lav2)"/>
+  <text x="200" y="80" font-family="monospace" font-size="46" font-weight="bold" fill="#2c3e50" text-anchor="middle">6 × 7 = ?</text>
+  <g font-family="monospace" font-size="28" font-weight="bold" fill="#ffffff" text-anchor="middle">
+    <rect x="70" y="120" width="80" height="52" rx="10" fill="#9b59b6"/><text x="110" y="155">42</text>
+    <rect x="160" y="120" width="80" height="52" rx="10" fill="#8e44ad"/><text x="200" y="155">36</text>
+    <rect x="250" y="120" width="80" height="52" rx="10" fill="#a569bd"/><text x="290" y="155">48</text>
+  </g>
+  <text x="200" y="222" font-family="monospace" font-size="20" fill="#8e44ad" text-anchor="middle">× 1 2 3 4 5 6 7 8 9</text>
+  <rect x="0" y="248" width="400" height="52" fill="#8e44ad"/>
+  <text x="200" y="282" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#ffffff" text-anchor="middle">Times Tables</text>
+</svg>

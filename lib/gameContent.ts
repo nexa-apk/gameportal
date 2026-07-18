@@ -669,6 +669,78 @@ const gameContent: Record<string, GameContent> = {
       'Try to keep a loose mental map of where higher numbers sit as you spot them early.',
     ],
   },
+
+  'quick-math': {
+    howToPlay: [
+      'A simple sum appears on the screen, already showing an answer.',
+      'Decide whether that answer is correct or wrong.',
+      'Tap the green tick if the sum is right, or the red cross if it is wrong.',
+      'You must answer before the timer bar empties — and the bar gets shorter as you score.',
+      'A wrong answer or a timeout costs a life. You have three lives.',
+    ],
+    about: `Quick Math is a mental-arithmetic reflex game, a format that trains one of the most useful everyday numeracy skills: estimation and the fast checking of whether a number "looks right". Rather than asking the player to work out an answer from scratch, it presents a completed sum and asks only for a snap judgement — true or false — which taps into a different and faster kind of thinking than a standard quiz. Educators value this "is it correct?" style because it builds number sense, the intuitive feel for how numbers behave that lets a person spot an obviously wrong total at a glance. The shrinking timer bar is the heart of the challenge: it forces the player to trust that instinct instead of laboriously recalculating every sum, and as the bar gets shorter with each correct answer the pressure ramps up smoothly, turning a gentle warm-up into a genuine test of speed and composure. Because a single round takes only a second or two, it delivers the same moreish "one more go" loop that has made fast-tap reflex games a mainstay of casual play, all while quietly sharpening real arithmetic fluency.`,
+    tips: [
+      'Do not fully recalculate — estimate whether the answer is roughly right first.',
+      'Watch the ones digit: if the sum should end in a certain digit and does not, it is wrong.',
+      'Trust your first instinct; the timer rewards a quick judgement over a slow, careful one.',
+      'For subtraction, a quick "add it back" check confirms the answer fast.',
+      'Stay calm as the bar shortens — panic causes more wrong taps than the speed itself.',
+    ],
+  },
+
+  'times-tables': {
+    howToPlay: [
+      'A multiplication question appears, such as "6 × 7 = ?".',
+      'Three answer buttons are shown below it.',
+      'Tap the button with the correct answer.',
+      'Each correct answer scores a point and the tables gradually get bigger.',
+      'A wrong answer costs a life. You have three lives — how far can you get?',
+    ],
+    about: `Times Tables turns the classic school task of learning multiplication into a game, and there is a great deal of educational research behind why that matters. Fluency with multiplication facts — being able to recall that 7 × 8 is 56 without stopping to work it out — is one of the strongest predictors of a child's later success in maths, because it frees up mental effort for harder problems built on top of those facts. The trouble is that rote memorisation of the tables can feel like a chore, and this is exactly where a game helps: the score to chase, the lives to protect and the instant "Correct!" feedback provide the repetition that builds recall while keeping a child engaged. The game starts with the small, friendly tables and grows toward the larger ones only as the player proves ready, an adaptive approach that keeps every question in the achievable-but-challenging zone where learning happens best. The multiple-choice format means a child can play using recognition and reasoning even before every fact is fully memorised, gently bridging the gap from working an answer out to simply knowing it.`,
+    tips: [
+      'Learn the tricky tables — 6, 7 and 8 times — first, as they cause the most hesitation.',
+      'If you are unsure, work up from a fact you know: 6 × 7 is 6 × 6 (36) plus one more 6.',
+      'The nine times table has a neat trick: the two digits of the answer always add up to nine.',
+      'Wrong answers are usually close to the right one, so double-check before tapping.',
+      'Practise the same table a few times in a row and the answers soon become automatic.',
+    ],
+  },
+
+  'math-rain': {
+    howToPlay: [
+      'A sum drops slowly from the top of the screen.',
+      'Three answer buttons wait at the bottom.',
+      'Work out the sum and tap its correct answer before it crosses the red line.',
+      'A correct answer scores a point and sends down a new, faster sum.',
+      'Letting a sum land, or tapping a wrong answer, costs a life. You have three.',
+    ],
+    about: `Math Rain combines arithmetic practice with the time pressure of a falling-object arcade game, a pairing that has proved remarkably effective at making drill practice feel like play. The falling sum creates a natural, visible countdown — there is no abstract timer to watch, just a number steadily approaching a line, which even very young players instantly understand as "hurry up". This turns each calculation into a small race, and racing is a powerful motivator: it pushes the player to move from slow, deliberate counting toward the fast recall that fluency requires, because hesitation is punished by the falling sum rather than by a scolding. As the answers are given as three choices, the game stays accessible to children still building confidence, letting them use estimation and elimination when they cannot compute instantly. The steadily increasing fall speed provides a smooth difficulty curve that keeps skilled players stretched while newcomers get gentle early rounds, and the arcade framing — bright colours, a dark sky, a danger line — gives a simple maths quiz the energy and replay-appeal of a proper game.`,
+    tips: [
+      'Read the sum the instant it appears at the top, while you still have the most time.',
+      'Use estimation to rule out any answer that is clearly too big or too small.',
+      'Do not stare at the falling number — glance between it and the answer buttons.',
+      'Even a rough answer helps: eliminate the two obviously wrong choices and pick the last.',
+      'As the sums fall faster, commit to your answer quickly rather than second-guessing.',
+    ],
+  },
+
+  'number-bonds': {
+    howToPlay: [
+      'A target number is shown at the top, for example "Make 10".',
+      'A grid of numbers sits below it.',
+      'Tap one number, then tap a second number so the two add up to the target.',
+      'A correct pair scores a point and refreshes the board with a new target.',
+      'Make as many number bonds as you can before the 60-second timer runs out.',
+    ],
+    about: `Number Bonds is built around one of the single most important ideas in early mathematics: knowing, instantly, which pairs of numbers add together to make another number. Teachers call these pairs "number bonds", and a child who can recall that 6 and 4 make 10, or that 7 and 3 make 10, has a foundation that makes all later addition, subtraction and mental arithmetic dramatically easier. This game drills that skill in the most active way possible — instead of being told the pairs, the player hunts for them, scanning the grid and combining numbers, which turns passive memorisation into genuine problem-solving. Because the target changes with each success, the player practises bonds to many different numbers rather than just one, building a flexible web of number relationships. The sixty-second timer adds a gentle urgency that encourages quick recall over slow counting, while the guarantee that every board contains at least one valid pair keeps the game fair and frustration-free for younger players. It is a compact, focused workout for exactly the mental arithmetic that classrooms work hardest to build.`,
+    tips: [
+      'Learn the pairs that make ten first — they are the most useful bonds of all.',
+      'Pick one number, then look for the exact partner it needs rather than testing pairs at random.',
+      'If a number is larger than the target, ignore it — it cannot be part of any pair.',
+      'Scan for the biggest number on the board and find its small partner; it is often the quickest bond.',
+      'Keep moving — a wrong pair costs no life, so a fast guess-and-check beats long deliberation.',
+    ],
+  },
 }
 
 export default gameContent

@@ -37,6 +37,10 @@ const gameComponentMap: Record<string, React.ComponentType> = {
   RockPaperScissors: dynamic(() => import('@/components/games/RockPaperScissors'), { ssr: false, loading: () => <GameLoading /> }),
   KeepyUppy: dynamic(() => import('@/components/games/KeepyUppy'), { ssr: false, loading: () => <GameLoading /> }),
   NumberTap: dynamic(() => import('@/components/games/NumberTap'), { ssr: false, loading: () => <GameLoading /> }),
+  QuickMath: dynamic(() => import('@/components/games/QuickMath'), { ssr: false, loading: () => <GameLoading /> }),
+  TimesTables: dynamic(() => import('@/components/games/TimesTables'), { ssr: false, loading: () => <GameLoading /> }),
+  MathRain: dynamic(() => import('@/components/games/MathRain'), { ssr: false, loading: () => <GameLoading /> }),
+  NumberBonds: dynamic(() => import('@/components/games/NumberBonds'), { ssr: false, loading: () => <GameLoading /> }),
 }
 
 function GameLoading() {

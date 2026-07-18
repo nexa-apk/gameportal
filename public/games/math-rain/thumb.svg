@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#0f2027"/>
+  <text x="130" y="70" font-family="monospace" font-size="34" font-weight="bold" fill="#ffffff" text-anchor="middle">3 + 4</text>
+  <text x="280" y="120" font-family="monospace" font-size="30" font-weight="bold" fill="#48dbfb" text-anchor="middle" opacity="0.7">9 − 2</text>
+  <line x1="20" y1="170" x2="380" y2="170" stroke="#ff6b81" stroke-width="2" opacity="0.6"/>
+  <g font-family="monospace" font-size="26" font-weight="bold" fill="#ffffff" text-anchor="middle">
+    <rect x="40" y="192" width="96" height="52" rx="10" fill="#0abde3"/><text x="88" y="227">7</text>
+    <rect x="152" y="192" width="96" height="52" rx="10" fill="#54a0ff"/><text x="200" y="227">6</text>
+    <rect x="264" y="192" width="96" height="52" rx="10" fill="#00d2d3"/><text x="312" y="227">8</text>
+  </g>
+  <rect x="0" y="248" width="400" height="52" fill="#0abde3"/>
+  <text x="200" y="282" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#08313d" text-anchor="middle">Math Rain</text>
+</svg>
